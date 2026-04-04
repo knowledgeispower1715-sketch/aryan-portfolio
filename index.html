@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryan Tiwari - Crypto & Blockchain Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f9f9f9;
+        }
+
+        header {
+            background: #fff;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0066ff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #0066ff;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            color: #fff;
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #fff;
+            color: #0066ff;
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .about h2,
+        .skills h2,
+        .contact h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #0066ff;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            color: #555;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-item {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #0066ff;
+        }
+
+        .info-item h3 {
+            color: #0066ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-item p {
+            color: #666;
+        }
+
+        .skills {
+            background: #fff;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+            color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact {
+            background: #f9f9f9;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .contact-item {
+            font-size: 1.1rem;
+        }
+
+        .contact-item a {
+            color: #0066ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: #00d4ff;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AT</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Aryan Tiwari</h1>
+        <p>Crypto Investor | Blockchain Developer | Trading Analyst</p>
+        <p style="font-size: 1rem; opacity: 0.8; margin-top: 1rem;">Based in Jabalpur, Madhya Pradesh | Age 20</p>
+        <a href="#contact" class="cta-button">Get In Touch</a>
+    </section>
+
+    <section class="about" id="about">
+        <h2>About Me</h2>
+        <p>
+            I'm a passionate crypto investor, blockchain developer, and trading analyst. I'm deeply fascinated by emerging technologies
+            and constantly learning new technical skills in the blockchain space. With a focus on cryptocurrency mining and trading analysis,
+            I combine technical knowledge with practical experience to navigate the digital asset landscape.
+        </p>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <h3>Age</h3>
+                <p>20 years old</p>
+            </div>
+            <div class="info-item">
+                <h3>Location</h3>
+                <p>Jabalpur, Madhya Pradesh, India</p>
+            </div>
+            <div class="info-item">
+                <h3>Focus</h3>
+                <p>Blockchain & Cryptocurrency</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <h2>Skills & Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-card">Cryptocurrency</div>
+            <div class="skill-card">Trading</div>
+            <div class="skill-card">Blockchain</div>
+            <div class="skill-card">Mining Analysis</div>
+            <div class="skill-card">Programming</div>
+            <div class="skill-card">Technical Analysis</div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <strong>Email:</strong> <a href="mailto:tiwariji0028@gmail.com">tiwariji0028@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <p>Feel free to reach out for collaborations or just a friendly chat about crypto and technology!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Aryan Tiwari. All rights reserved. | Passionate about technology and continuous learning</p>
+    </footer>
+</body>
+</html>
