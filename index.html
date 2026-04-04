@@ -3,23 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARYAN TIWARI - RETRO PORTFOLIO v1.0</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <title>Aryan Tiwari - Blockchain Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
+
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
-        :root {
-            --neon-pink: #ff006e;
-            --neon-cyan: #00f5ff;
-            --neon-purple: #b537f2;
-            --neon-yellow: #ffff00;
-            --neon-green: #39ff14;
-            --dark-bg: #0a0a0a;
-            --dark-purple: #1a0033;
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         html {
@@ -27,638 +21,265 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--dark-purple) 0%, var(--dark-bg) 100%);
-            color: var(--neon-cyan);
-            font-family: 'VT323', monospace;
-            line-height: 1.8;
-            overflow-x: hidden;
-            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #0f172a 100%);
+            color: #e2e8f0;
         }
 
-        /* Scanline effect */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15) 0px,
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            z-index: 9999;
-            animation: flicker 0.15s infinite;
+        .gradient-text {
+            background: linear-gradient(135deg, #00d9ff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        @keyframes flicker {
-            0% { opacity: 0.97; }
-            50% { opacity: 1; }
-            100% { opacity: 0.97; }
+        .card-glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 217, 255, 0.1);
         }
 
-        /* CRT corner vignette */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
-            pointer-events: none;
-            z-index: 9998;
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: linear-gradient(90deg, var(--dark-purple), var(--dark-bg));
-            border-bottom: 3px solid var(--neon-cyan);
-            padding: 1rem 0;
-            z-index: 1000;
-            box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-purple);
+        .card-hover:hover {
+            border-color: rgba(0, 217, 255, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.1);
         }
 
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 1.5rem;
-            color: var(--neon-yellow);
-            text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-pink);
-            letter-spacing: 2px;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-pink); }
-            50% { text-shadow: 0 0 20px var(--neon-yellow), 0 0 40px var(--neon-pink), 0 0 60px var(--neon-cyan); }
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--neon-cyan);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            position: relative;
-            font-weight: bold;
-            transition: all 0.2s;
-            text-transform: uppercase;
-        }
-
-        .nav-links a:hover {
-            color: var(--neon-pink);
-            text-shadow: 0 0 10px var(--neon-pink);
-        }
-
-        /* Hero Section */
-        .hero {
-            margin-top: 100px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding: 3rem 2rem;
-            border-bottom: 3px dashed var(--neon-pink);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(0, 245, 255, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse-glow 3s infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 0, 110, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: pulse-glow 4s infinite reverse;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 1000px;
-        }
-
-        .hero h1 {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            letter-spacing: 3px;
-            line-height: 1.2;
-            color: var(--neon-yellow);
-            text-shadow: 0 0 20px var(--neon-yellow), 0 0 40px var(--neon-pink), 0 0 60px var(--neon-cyan);
-            animation: blink 0.5s infinite;
-        }
-
-        @keyframes blink {
-            0%, 49%, 100% { opacity: 1; }
-            50%, 99% { opacity: 0.8; }
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--neon-cyan);
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--neon-cyan);
-            text-transform: uppercase;
-        }
-
-        .hero-code {
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--neon-green);
-            padding: 1.5rem;
-            margin: 2rem 0;
-            text-align: left;
-            font-size: 0.9rem;
-            overflow-x: auto;
-            color: var(--neon-green);
-            text-shadow: 0 0 5px var(--neon-green);
-            box-shadow: inset 0 0 10px rgba(57, 255, 20, 0.2);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 3rem;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            border: 3px solid;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s;
-            letter-spacing: 2px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-family: 'VT323', monospace;
-            position: relative;
-            background: var(--dark-bg);
-            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
-        }
-
-        .btn-primary {
-            border-color: var(--neon-pink);
-            color: var(--neon-pink);
-            text-shadow: 0 0 10px var(--neon-pink);
-        }
-
-        .btn-primary:hover {
-            background: var(--neon-pink);
-            color: var(--dark-bg);
-            text-shadow: none;
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0 rgba(255, 0, 110, 0.5);
-        }
-
-        .btn-secondary {
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        .btn-secondary:hover {
-            background: var(--neon-cyan);
-            color: var(--dark-bg);
-            text-shadow: none;
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0 rgba(0, 245, 255, 0.5);
-        }
-
-        /* Sections */
-        section {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 6rem 2rem;
-            position: relative;
-            z-index: 2;
-            border-bottom: 3px dashed var(--neon-purple);
-        }
-
-        .section-title {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
-            color: var(--neon-yellow);
-            text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-pink);
-            text-transform: uppercase;
-        }
-
-        .section-subtitle {
-            color: var(--neon-cyan);
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            letter-spacing: 1px;
-            text-shadow: 0 0 5px var(--neon-cyan);
-            max-width: 600px;
-        }
-
-        /* About Section */
-        .about {
-            background: linear-gradient(135deg, rgba(26, 0, 51, 0.8), rgba(10, 10, 10, 0.8));
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            margin-top: 2rem;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 2;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 5px var(--neon-cyan);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            border-left: 3px solid var(--neon-green);
-            padding-left: 1rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .stat {
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid var(--neon-cyan);
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(0, 245, 255, 0.3), inset 0 0 10px rgba(0, 245, 255, 0.1);
-            transition: all 0.3s;
-        }
-
-        .stat:hover {
-            border-color: var(--neon-pink);
-            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5), inset 0 0 15px rgba(255, 0, 110, 0.2);
-            transform: scale(1.05);
-        }
-
-        .stat-value {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 2rem;
-            color: var(--neon-yellow);
-            text-shadow: 0 0 10px var(--neon-yellow);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--neon-purple);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* Skills Section */
-        .skills {
-            background: linear-gradient(135deg, rgba(10, 10, 10, 0.8), rgba(26, 0, 51, 0.8));
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill-card {
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid var(--neon-green);
-            padding: 2rem;
+        .btn-glow {
             transition: all 0.3s;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
         }
 
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.2), transparent);
-            transition: left 0.5s;
+        .btn-glow:hover {
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+            transform: translateY(-2px);
         }
 
-        .skill-card:hover::before {
-            left: 100%;
-        }
-
-        .skill-card:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.5), inset 0 0 10px rgba(0, 245, 255, 0.1);
-            transform: translateY(-10px);
+        .section-gradient {
+            background: linear-gradient(180deg, rgba(0, 217, 255, 0.05) 0%, transparent 100%);
         }
 
         .skill-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
-
-        .skill-name {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: 1px;
-            color: var(--neon-yellow);
-            text-shadow: 0 0 5px var(--neon-yellow);
-            text-transform: uppercase;
-        }
-
-        .skill-desc {
-            font-size: 1rem;
-            color: var(--neon-cyan);
-            line-height: 1.8;
-            text-shadow: 0 0 5px var(--neon-cyan);
-        }
-
-        /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, rgba(26, 0, 51, 0.9), rgba(10, 10, 10, 0.9));
-            text-align: center;
-        }
-
-        .contact-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            font-size: 1.1rem;
-            color: var(--neon-cyan);
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid var(--neon-cyan);
-            padding: 1.5rem;
-            text-shadow: 0 0 5px var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
-        }
-
-        .contact-item a {
-            color: var(--neon-pink);
-            text-decoration: none;
-            font-weight: bold;
-            text-shadow: 0 0 10px var(--neon-pink);
-        }
-
-        .contact-item a:hover {
-            color: var(--neon-yellow);
-            text-shadow: 0 0 15px var(--neon-yellow);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-purple);
-            border-top: 3px solid var(--neon-cyan);
-            padding: 3rem 2rem;
-            text-align: center;
-            color: var(--neon-cyan);
-            font-size: 0.9rem;
-            text-shadow: 0 0 5px var(--neon-cyan);
-            box-shadow: 0 0 20px var(--neon-cyan);
-        }
-
-        .retro-box {
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid var(--neon-cyan);
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 0 15px rgba(0, 245, 255, 0.3), inset 0 0 10px rgba(0, 245, 255, 0.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .about-grid,
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .nav-links a {
-                font-size: 0.8rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
     </style>
 </head>
-<body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo">> AT</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full card-glass border-b z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="font-display font-bold text-xl gradient-text">AT</div>
+            <div class="flex gap-8">
+                <a href="#about" class="text-slate-400 hover:text-cyan-400 transition">About</a>
+                <a href="#skills" class="text-slate-400 hover:text-cyan-400 transition">Skills</a>
+                <a href="#contact" class="text-slate-400 hover:text-cyan-400 transition">Contact</a>
+            </div>
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>ARYAN<br>TIWARI</h1>
-            <p class="hero-subtitle">> CRYPTO DEVELOPER v1.0</p>
-
-            <div class="hero-code">
-                $ whoami<br>
-                >>> Blockchain Developer & Crypto Analyst<br>
-                $ status<br>
-                >>> ONLINE & READY TO BUILD<br>
-                $ skills --list<br>
-                >>> crypto, trading, blockchain, mining, programming<br>
-            </div>
-
-            <div class="cta-buttons">
-                <a href="#contact" class="btn btn-primary">[ CONTACT ]</a>
-                <a href="#skills" class="btn btn-secondary">[ SKILLS ]</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="about" id="about">
-        <h2 class="section-title">> ABOUT_ME.EXE</h2>
-        <p class="section-subtitle">System Information // Age 20 | Jabalpur, India</p>
-
-        <div class="about-grid">
-            <div>
-                <div class="about-text">
-                    <p>
-                        >> Initializing blockchain developer sequence...
-                    </p>
-                    <p>
-                        20-year-old crypto enthusiast passionate about DeFi, smart contracts, and digital assets. Specializing in trading algorithms and cryptocurrency mining optimization.
-                    </p>
-                    <p>
-                        >> System Status: LEARNING || BUILDING || INNOVATING
-                    </p>
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 min-h-screen flex items-center">
+        <div class="max-w-6xl mx-auto w-full">
+            <div class="space-y-8 text-center">
+                <div class="inline-block">
+                    <div class="px-3 py-1 rounded-full card-glass text-xs font-medium text-cyan-400">
+                        🚀 Blockchain Developer
+                    </div>
                 </div>
-            </div>
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-value">20</div>
-                    <div class="stat-label">AGE</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">6</div>
-                    <div class="stat-label">SKILLS</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">🇮🇳</div>
-                    <div class="stat-label">INDIA</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">∞</div>
-                    <div class="stat-label">LEARNING</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="skills" id="skills">
-        <h2 class="section-title">> LOAD_SKILLS.CMD</h2>
-        <p class="section-subtitle">Technical Capabilities // Ready for Deployment</p>
+                <h1 class="font-display text-5xl md:text-7xl font-bold text-white leading-tight">
+                    <span class="gradient-text">Aryan Tiwari</span>
+                </h1>
 
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-icon">₿</div>
-                <div class="skill-name">Crypto</div>
-                <div class="skill-desc">> Digital Assets | Wallets | Exchanges | Networks</div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">📊</div>
-                <div class="skill-name">Trading</div>
-                <div class="skill-desc">> Technical Analysis | Market Trends | Strategies</div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">⛓️</div>
-                <div class="skill-name">Blockchain</div>
-                <div class="skill-desc">> Smart Contracts | DeFi | Architecture</div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">⚙️</div>
-                <div class="skill-name">Mining</div>
-                <div class="skill-desc">> Optimization | Pools | Hardware Efficiency</div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">💻</div>
-                <div class="skill-name">Programming</div>
-                <div class="skill-desc">> Web3 | Full-Stack | Modern Tech</div>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">🔬</div>
-                <div class="skill-name">Analysis</div>
-                <div class="skill-desc">> Charts | Indicators | On-Chain Metrics</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact" id="contact">
-        <h2 class="section-title">> INITIATE_CONTACT.BAT</h2>
-        <p class="section-subtitle">Transmission Protocol // Ready to Connect</p>
-
-        <div class="contact-content">
-            <div class="retro-box">
-                <p style="font-size: 1.2rem; color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green);">
-                    $ AWAITING_INPUT...
+                <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">
+                    Building the future of decentralized finance. Crypto investor, blockchain developer, and trading analyst passionate about emerging technologies.
                 </p>
-            </div>
 
-            <div class="contact-info">
-                <div class="contact-item">
-                    📧 <a href="mailto:tiwariji0028@gmail.com">tiwariji0028@gmail.com</a>
+                <div class="flex flex-wrap gap-4 justify-center pt-4">
+                    <a href="#contact" class="px-8 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold btn-glow">
+                        Get In Touch
+                    </a>
+                    <a href="#skills" class="px-8 py-3 rounded-lg card-glass text-cyan-400 font-semibold btn-glow border border-cyan-500/30 hover:border-cyan-400">
+                        View Skills
+                    </a>
                 </div>
-                <div class="contact-item">
-                    💬 OPEN_FOR_COLLAB || crypto | blockchain | trading | web3
+
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-4 mt-16 max-w-2xl mx-auto">
+                    <div class="card-glass card-hover p-4 rounded-lg">
+                        <div class="text-2xl font-bold gradient-text">20</div>
+                        <div class="text-sm text-slate-400">Age</div>
+                    </div>
+                    <div class="card-glass card-hover p-4 rounded-lg">
+                        <div class="text-2xl font-bold gradient-text">6+</div>
+                        <div class="text-sm text-slate-400">Skills</div>
+                    </div>
+                    <div class="card-glass card-hover p-4 rounded-lg">
+                        <div class="text-2xl font-bold gradient-text">🇮🇳</div>
+                        <div class="text-sm text-slate-400">Jabalpur</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>> ARYAN_TIWARI_PORTFOLIO v1.0 [RETRO_EDITION] // 2026 // STATUS: LIVE <<</p>
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 section-gradient">
+        <div class="max-w-6xl mx-auto">
+            <div class="space-y-4 mb-12">
+                <p class="text-cyan-400 font-semibold text-sm tracking-widest">ABOUT</p>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Who I Am</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-slate-300 text-lg leading-relaxed">
+                        I'm a 20-year-old blockchain developer and crypto analyst with a deep passion for decentralized finance and emerging technologies.
+                    </p>
+                    <p class="text-slate-300 text-lg leading-relaxed">
+                        With expertise in smart contract development, trading algorithms, and cryptocurrency mining optimization, I specialize in creating solutions that bridge traditional finance and Web3.
+                    </p>
+                    <p class="text-slate-300 text-lg leading-relaxed">
+                        Currently based in Jabalpur, Madhya Pradesh, I'm constantly learning and staying at the forefront of blockchain innovation.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="card-glass card-hover p-6 rounded-xl">
+                        <div class="font-display text-3xl font-bold gradient-text mb-2">20</div>
+                        <p class="text-slate-400 text-sm">Years Old</p>
+                    </div>
+                    <div class="card-glass card-hover p-6 rounded-xl">
+                        <div class="font-display text-3xl font-bold gradient-text mb-2">6</div>
+                        <p class="text-slate-400 text-sm">Core Skills</p>
+                    </div>
+                    <div class="card-glass card-hover p-6 rounded-xl">
+                        <div class="font-display text-3xl font-bold gradient-text mb-2">🚀</div>
+                        <p class="text-slate-400 text-sm">Building Web3</p>
+                    </div>
+                    <div class="card-glass card-hover p-6 rounded-xl">
+                        <div class="font-display text-3xl font-bold gradient-text mb-2">∞</div>
+                        <p class="text-slate-400 text-sm">Learning Mode</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="space-y-4 mb-12">
+                <p class="text-cyan-400 font-semibold text-sm tracking-widest">EXPERTISE</p>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Skills & Knowledge</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cryptocurrency -->
+                <div class="card-glass card-hover p-8 rounded-xl">
+                    <div class="skill-icon">₿</div>
+                    <h3 class="font-display font-bold text-xl text-white mb-2">Cryptocurrency</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Deep knowledge of digital assets, blockchain networks, wallets, and decentralized exchanges.
+                    </p>
+                </div>
+
+                <!-- Trading -->
+                <div class="card-glass card-hover p-8 rounded-xl">
+                    <div class="skill-icon">📊</div>
+                    <h3 class="font-display font-bold text-xl text-white mb-2">Trading Analysis</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Technical analysis, market trends, trading strategies, and risk management.
+                    </p>
+                </div>
+
+                <!-- Blockchain -->
+                <div class="card-glass card-hover p-8 rounded-xl">
+                    <div class="skill-icon">⛓️</div>
+                    <h3 class="font-display font-bold text-xl text-white mb-2">Blockchain</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Smart contracts, DeFi protocols, and blockchain architecture.
+                    </p>
+                </div>
+
+                <!-- Mining -->
+                <div class="card-glass card-hover p-8 rounded-xl">
+                    <div class="skill-icon">⚙️</div>
+                    <h3 class="font-display font-bold text-xl text-white mb-2">Mining</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Cryptocurrency mining optimization, pool management, and efficiency.
+                    </p>
+                </div>
+
+                <!-- Programming -->
+                <div class="card-glass card-hover p-8 rounded-xl">
+                    <div class="skill-icon">💻</div>
+                    <h3 class="font-display font-bold text-xl text-white mb-2">Programming</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Full-stack development with modern Web3 technologies and frameworks.
+                    </p>
+                </div>
+
+                <!-- Technical Analysis -->
+                <div class="card-glass card-hover p-8 rounded-xl">
+                    <div class="skill-icon">🔬</div>
+                    <h3 class="font-display font-bold text-xl text-white mb-2">Technical Analysis</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Market analysis, chart patterns, indicators, and predictive models.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 section-gradient">
+        <div class="max-w-4xl mx-auto">
+            <div class="space-y-4 mb-12 text-center">
+                <p class="text-cyan-400 font-semibold text-sm tracking-widest">CONTACT</p>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Let's Build Together</h2>
+                <p class="text-slate-400 text-lg">Ready to collaborate on blockchain projects and crypto innovations</p>
+            </div>
+
+            <div class="card-glass rounded-xl p-8 md:p-12 text-center">
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-slate-400 text-sm mb-2">Email</p>
+                        <a href="mailto:tiwariji0028@gmail.com" class="text-cyan-400 hover:text-cyan-300 font-semibold text-lg">
+                            tiwariji0028@gmail.com
+                        </a>
+                    </div>
+                    <div>
+                        <p class="text-slate-400 text-sm mb-2">Open To</p>
+                        <p class="text-slate-300">Crypto | Blockchain | Trading | Web3 | Emerging Tech</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-8 px-4">
+        <div class="max-w-6xl mx-auto text-center text-slate-500 text-sm">
+            <p>&copy; 2026 Aryan Tiwari. All rights reserved. | Blockchain Developer & Crypto Analyst</p>
+        </div>
     </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
