@@ -317,6 +317,14 @@
             align-items: center;
         }
 
+        .about-grid > div:first-child {
+            order: 2;
+        }
+
+        .about-grid > div:last-child {
+            order: 1;
+        }
+
         .about-text {
             font-size: 1.1rem;
             line-height: 1.8;
@@ -393,6 +401,8 @@
 
         .skill-card {
             background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(168, 85, 247, 0.05));
+            background-size: cover;
+            background-position: center;
             border: 1px solid var(--border-color);
             padding: 3rem;
             border-radius: 15px;
@@ -400,6 +410,21 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(5, 8, 18, 0.85), rgba(10, 14, 39, 0.9));
+            z-index: 0;
         }
 
         .skill-card::before {
@@ -427,6 +452,8 @@
         .skill-icon {
             font-size: 3rem;
             margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .skill-name {
@@ -434,12 +461,16 @@
             font-weight: 700;
             margin-bottom: 1rem;
             letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
         }
 
         .skill-desc {
             font-size: 1rem;
             color: var(--text-secondary);
             line-height: 1.7;
+            position: relative;
+            z-index: 1;
         }
 
         /* Contact Section */
@@ -582,6 +613,7 @@
 
     <section class="hero">
         <div class="hero-content">
+            <img src="https://images.unsplash.com/photo-1639762681033-6461ffad8d80?w=400&h=400&fit=crop" alt="Crypto Analyst" style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 2rem; border: 3px solid var(--accent-primary); object-fit: cover; display: block; margin-left: auto; margin-right: auto;">
             <div class="hero-badge">Blockchain Developer & Crypto Analyst</div>
             <h1>ARYAN<br>TIWARI</h1>
             <p class="hero-subtitle">Building the future of decentralized finance</p>
@@ -605,6 +637,9 @@
         </div>
 
         <div class="about-grid">
+            <div style="position: relative;">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=600&fit=crop" alt="Blockchain Technology" style="width: 100%; border-radius: 15px; border: 1px solid var(--border-color);">
+            </div>
             <div>
                 <div class="about-text">
                     <p>
@@ -647,32 +682,32 @@
         </div>
 
         <div class="skills-grid">
-            <div class="skill-card">
+            <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1639762681033-6461ffad8d80?w=600&h=600&fit=crop');">
                 <div class="skill-icon">₿</div>
                 <div class="skill-name">Cryptocurrency</div>
                 <div class="skill-desc">Deep knowledge of digital assets, blockchain networks, wallets, and decentralized exchanges</div>
             </div>
-            <div class="skill-card">
+            <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=600&fit=crop');">
                 <div class="skill-icon">📊</div>
                 <div class="skill-name">Trading Analysis</div>
                 <div class="skill-desc">Technical analysis, market trends, trading strategies, risk management, and portfolio optimization</div>
             </div>
-            <div class="skill-card">
+            <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f5ae4e8cf00?w=600&h=600&fit=crop');">
                 <div class="skill-icon">⛓️</div>
                 <div class="skill-name">Blockchain</div>
                 <div class="skill-desc">Smart contracts, DeFi protocols, blockchain architecture, and distributed systems design</div>
             </div>
-            <div class="skill-card">
+            <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f5ae4e8cf00?w=600&h=600&fit=crop');">
                 <div class="skill-icon">⚙️</div>
                 <div class="skill-name">Mining</div>
                 <div class="skill-desc">Cryptocurrency mining optimization, pool management, hardware efficiency, and profitability analysis</div>
             </div>
-            <div class="skill-card">
+            <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=600&fit=crop');">
                 <div class="skill-icon">💻</div>
                 <div class="skill-name">Programming</div>
                 <div class="skill-desc">Full-stack development with modern technologies, Web3 frameworks, and blockchain tools</div>
             </div>
-            <div class="skill-card">
+            <div class="skill-card" style="background-image: url('https://images.unsplash.com/photo-1560732488-6f5e0db32eef?w=600&h=600&fit=crop');">
                 <div class="skill-icon">🔬</div>
                 <div class="skill-name">Technical Analysis</div>
                 <div class="skill-desc">Market analysis, chart patterns, indicators, predictive models, and on-chain metrics</div>
