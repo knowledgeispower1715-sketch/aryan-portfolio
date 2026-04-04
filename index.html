@@ -82,10 +82,19 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4 min-h-screen flex items-center">
+    <section class="pt-32 pb-20 px-4 min-h-screen flex items-center relative overflow-hidden">
+        <!-- Background Video -->
+        <div class="absolute inset-0 -z-10 w-full h-full">
+            <video autoplay muted loop class="w-full h-full object-cover opacity-20">
+                <source src="https://videos.pexels.com/video-files/3935702/3935702-sd_640_360_25fps.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-900/20 to-slate-900/80"></div>
+        </div>
+
         <div class="max-w-6xl mx-auto w-full">
             <div class="space-y-8 text-center">
                 <div class="inline-block">
+                    <img src="https://images.unsplash.com/photo-1639762681033-6461ffad8d80?w=120&h=120&fit=crop" alt="Profile" class="w-24 h-24 rounded-full border-2 border-cyan-500 mx-auto mb-4">
                     <div class="px-3 py-1 rounded-full card-glass text-xs font-medium text-cyan-400">
                         🚀 Blockchain Developer
                     </div>
@@ -136,7 +145,10 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
+                <div class="order-2 md:order-1">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=600&fit=crop" alt="Blockchain Technology" class="rounded-xl border border-cyan-500/30 shadow-lg">
+                </div>
+                <div class="order-1 md:order-2 space-y-6">
                     <p class="text-slate-300 text-lg leading-relaxed">
                         I'm a 20-year-old blockchain developer and crypto analyst with a deep passion for decentralized finance and emerging technologies.
                     </p>
@@ -180,57 +192,115 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Cryptocurrency -->
-                <div class="card-glass card-hover p-8 rounded-xl">
-                    <div class="skill-icon">₿</div>
-                    <h3 class="font-display font-bold text-xl text-white mb-2">Cryptocurrency</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Deep knowledge of digital assets, blockchain networks, wallets, and decentralized exchanges.
-                    </p>
+                <div class="card-hover rounded-xl overflow-hidden group relative h-80 flex flex-col justify-end">
+                    <img src="https://images.unsplash.com/photo-1639762681033-6461ffad8d80?w=600&h=600&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                    <div class="relative p-8 z-10">
+                        <div class="skill-icon">₿</div>
+                        <h3 class="font-display font-bold text-xl text-white mb-2">Cryptocurrency</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Deep knowledge of digital assets, blockchain networks, wallets, and exchanges.
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Trading -->
-                <div class="card-glass card-hover p-8 rounded-xl">
-                    <div class="skill-icon">📊</div>
-                    <h3 class="font-display font-bold text-xl text-white mb-2">Trading Analysis</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Technical analysis, market trends, trading strategies, and risk management.
-                    </p>
+                <div class="card-hover rounded-xl overflow-hidden group relative h-80 flex flex-col justify-end">
+                    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=600&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                    <div class="relative p-8 z-10">
+                        <div class="skill-icon">📊</div>
+                        <h3 class="font-display font-bold text-xl text-white mb-2">Trading Analysis</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Technical analysis, market trends, strategies, and risk management.
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Blockchain -->
-                <div class="card-glass card-hover p-8 rounded-xl">
-                    <div class="skill-icon">⛓️</div>
-                    <h3 class="font-display font-bold text-xl text-white mb-2">Blockchain</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Smart contracts, DeFi protocols, and blockchain architecture.
-                    </p>
+                <div class="card-hover rounded-xl overflow-hidden group relative h-80 flex flex-col justify-end">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f5ae4e8cf00?w=600&h=600&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                    <div class="relative p-8 z-10">
+                        <div class="skill-icon">⛓️</div>
+                        <h3 class="font-display font-bold text-xl text-white mb-2">Blockchain</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Smart contracts, DeFi protocols, and blockchain architecture.
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Mining -->
-                <div class="card-glass card-hover p-8 rounded-xl">
-                    <div class="skill-icon">⚙️</div>
-                    <h3 class="font-display font-bold text-xl text-white mb-2">Mining</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Cryptocurrency mining optimization, pool management, and efficiency.
-                    </p>
+                <div class="card-hover rounded-xl overflow-hidden group relative h-80 flex flex-col justify-end">
+                    <img src="https://images.unsplash.com/photo-1518320506885-38a2ebb0c772?w=600&h=600&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                    <div class="relative p-8 z-10">
+                        <div class="skill-icon">⚙️</div>
+                        <h3 class="font-display font-bold text-xl text-white mb-2">Mining</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Mining optimization, pool management, and efficiency.
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Programming -->
-                <div class="card-glass card-hover p-8 rounded-xl">
-                    <div class="skill-icon">💻</div>
-                    <h3 class="font-display font-bold text-xl text-white mb-2">Programming</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Full-stack development with modern Web3 technologies and frameworks.
-                    </p>
+                <div class="card-hover rounded-xl overflow-hidden group relative h-80 flex flex-col justify-end">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=600&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                    <div class="relative p-8 z-10">
+                        <div class="skill-icon">💻</div>
+                        <h3 class="font-display font-bold text-xl text-white mb-2">Programming</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Full-stack development with Web3 and modern frameworks.
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Technical Analysis -->
-                <div class="card-glass card-hover p-8 rounded-xl">
-                    <div class="skill-icon">🔬</div>
-                    <h3 class="font-display font-bold text-xl text-white mb-2">Technical Analysis</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Market analysis, chart patterns, indicators, and predictive models.
-                    </p>
+                <div class="card-hover rounded-xl overflow-hidden group relative h-80 flex flex-col justify-end">
+                    <img src="https://images.unsplash.com/photo-1560732488-6f5e0db32eef?w=600&h=600&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+                    <div class="relative p-8 z-10">
+                        <div class="skill-icon">🔬</div>
+                        <h3 class="font-display font-bold text-xl text-white mb-2">Technical Analysis</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Market analysis, patterns, indicators, and models.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Content -->
+    <section class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="space-y-4 mb-12">
+                <p class="text-cyan-400 font-semibold text-sm tracking-widest">FEATURED</p>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Learn About Crypto & Blockchain</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Video 1 -->
+                <div class="rounded-xl overflow-hidden border border-cyan-500/30 group">
+                    <div class="relative h-80 bg-slate-900">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/mCy5NZBHqFc" title="Blockchain Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6 bg-slate-900/50">
+                        <h3 class="font-display font-bold text-lg text-white mb-2">What is Blockchain?</h3>
+                        <p class="text-slate-400 text-sm">Understand the fundamentals of blockchain technology</p>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="rounded-xl overflow-hidden border border-cyan-500/30 group">
+                    <div class="relative h-80 bg-slate-900">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/9V1bipPkCTU" title="Bitcoin Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6 bg-slate-900/50">
+                        <h3 class="font-display font-bold text-lg text-white mb-2">Bitcoin & Cryptocurrency</h3>
+                        <p class="text-slate-400 text-sm">Deep dive into Bitcoin and digital currency systems</p>
+                    </div>
                 </div>
             </div>
         </div>
