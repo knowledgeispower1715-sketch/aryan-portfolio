@@ -7,6 +7,7 @@
     <meta name="keywords" content="Blockchain, Cryptocurrency, Web3, Developer, Cyber Security, Python, Java, Kali Linux">
     <title>Aryan Tiwari | Blockchain Developer & Crypto Expert</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
@@ -26,6 +27,17 @@
         body {
             background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #0f172a 100%);
             color: #e2e8f0;
+            perspective: 1200px;
+        }
+
+        /* 3D Background */
+        #canvas-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
 
         .gradient-text {
@@ -39,6 +51,15 @@
             background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .card-3d:hover {
+            transform: rotateX(10deg) rotateY(-10deg) scale(1.05);
         }
 
         .card-hover {
@@ -57,7 +78,7 @@
         }
 
         .btn-glow:hover {
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4), 0 0 40px rgba(0, 217, 255, 0.2);
             transform: translateY(-2px);
         }
 
@@ -75,6 +96,15 @@
             font-size: 0.875rem;
             font-weight: 500;
             margin: 0.5rem 0.5rem 0.5rem 0;
+            transform-style: preserve-3d;
+            transition: all 0.3s;
+        }
+
+        .skill-badge:hover {
+            transform: translateZ(20px) scale(1.05);
+            border-color: rgba(0, 217, 255, 0.6);
+            background: rgba(0, 217, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
         }
 
         .experience-item {
@@ -82,6 +112,13 @@
             padding-left: 1.5rem;
             margin-bottom: 2rem;
             position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover {
+            transform: translateZ(10px);
+            border-left-color: #a855f7;
         }
 
         .experience-item::before {
@@ -94,10 +131,98 @@
             background: #00d9ff;
             border-radius: 50%;
             border: 3px solid #0f172a;
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover::before {
+            background: #a855f7;
+            box-shadow: 0 0 20px #a855f7;
+        }
+
+        /* 3D Profile Picture */
+        .profile-3d {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateZ(0deg); }
+            50% { transform: translateY(-20px) rotateZ(2deg); }
+        }
+
+        .profile-3d img {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            border: 3px solid #00d9ff;
+            box-shadow:
+                0 0 30px rgba(0, 217, 255, 0.5),
+                0 0 60px rgba(168, 85, 247, 0.3),
+                inset 0 0 30px rgba(0, 217, 255, 0.1);
+            transition: all 0.3s;
+            transform-style: preserve-3d;
+        }
+
+        .profile-3d:hover img {
+            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+            box-shadow:
+                0 0 50px rgba(0, 217, 255, 0.8),
+                0 0 100px rgba(168, 85, 247, 0.5),
+                inset 0 0 30px rgba(0, 217, 255, 0.2);
+        }
+
+        /* Floating particles background */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* Text animation */
+        .text-glow {
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.5), 0 0 20px rgba(168, 85, 247, 0.3);
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { text-shadow: 0 0 10px rgba(0, 217, 255, 0.5), 0 0 20px rgba(168, 85, 247, 0.3); }
+            50% { text-shadow: 0 0 20px rgba(0, 217, 255, 0.8), 0 0 40px rgba(168, 85, 247, 0.5); }
+        }
+
+        /* Section fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Parallax effect for cards */
+        .parallax-card {
+            transform-style: preserve-3d;
+            transition: transform 0.1s linear;
+        }
+
+        .stat-counter {
+            font-size: 2.5rem;
+            font-weight: bold;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased" onmousemove="handleMouseMove(event)">
+    <!-- 3D Canvas Background -->
+    <canvas id="canvas-background"></canvas>
+
     <!-- Navigation -->
     <nav class="fixed top-0 w-full card-glass border-b z-50 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -126,29 +251,32 @@
 
         <div class="max-w-7xl mx-auto w-full">
             <div class="space-y-8">
-                <div class="flex flex-col md:flex-row gap-8 items-center">
-                    <div class="flex-1 space-y-6">
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="flex-1 space-y-6 fade-in">
                         <div>
                             <div class="inline-block mb-4">
-                                <div class="px-4 py-2 rounded-full card-glass text-sm font-medium text-cyan-400">
+                                <div class="px-4 py-2 rounded-full card-glass text-sm font-medium text-cyan-400 card-3d">
                                     🚀 Blockchain Developer & Crypto Expert
                                 </div>
                             </div>
                         </div>
 
-                        <h1 class="font-display text-5xl md:text-6xl font-bold text-white leading-tight">
+                        <h1 class="font-display text-5xl md:text-7xl font-bold text-white leading-tight text-glow">
                             <span class="gradient-text">Aryan Tiwari</span>
                         </h1>
 
-                        <div class="space-y-2">
-                            <p class="text-lg text-slate-300">
+                        <div class="space-y-3">
+                            <p class="text-lg text-slate-300 card-3d">
                                 <i class="fas fa-map-marker-alt text-cyan-400 mr-2"></i>Jabalpur, Madhya Pradesh, India
                             </p>
-                            <p class="text-lg text-slate-300">
+                            <p class="text-lg text-slate-300 card-3d">
                                 <i class="fas fa-briefcase text-cyan-400 mr-2"></i>8+ Years Cryptocurrency Experience
                             </p>
-                            <p class="text-lg text-slate-300">
+                            <p class="text-lg text-slate-300 card-3d">
                                 <i class="fas fa-code text-cyan-400 mr-2"></i>Full-Stack Developer | Security Specialist
+                            </p>
+                            <p class="text-lg text-slate-300 card-3d">
+                                <i class="fas fa-birthday-cake text-cyan-400 mr-2"></i>20 Years Old
                             </p>
                         </div>
 
@@ -157,40 +285,43 @@
                         </p>
 
                         <div class="flex flex-wrap gap-3 pt-4">
-                            <a href="#contact" class="px-8 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold btn-glow flex items-center gap-2">
+                            <a href="#contact" class="px-8 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold btn-glow card-3d flex items-center gap-2">
                                 <i class="fas fa-envelope"></i> Get In Touch
                             </a>
-                            <a href="https://www.linkedin.com/in/aryan-t-199014224" target="_blank" class="px-8 py-3 rounded-lg card-glass text-cyan-400 font-semibold btn-glow border border-cyan-500/30 hover:border-cyan-400 flex items-center gap-2">
+                            <a href="https://www.linkedin.com/in/aryan-t-199014224" target="_blank" class="px-8 py-3 rounded-lg card-glass text-cyan-400 font-semibold btn-glow border border-cyan-500/30 card-3d flex items-center gap-2">
                                 <i class="fab fa-linkedin"></i> LinkedIn
                             </a>
-                            <a href="#expertise" class="px-8 py-3 rounded-lg card-glass text-cyan-400 font-semibold btn-glow border border-cyan-500/30 hover:border-cyan-400 flex items-center gap-2">
+                            <a href="#expertise" class="px-8 py-3 rounded-lg card-glass text-cyan-400 font-semibold btn-glow border border-cyan-500/30 card-3d flex items-center gap-2">
                                 <i class="fas fa-code"></i> Skills
                             </a>
                         </div>
                     </div>
 
-                    <div class="flex-1 flex justify-center">
-                        <img src="https://images.unsplash.com/photo-1639762681033-6461ffad8d80?w=500&h=500&fit=crop" alt="Aryan Tiwari" class="w-80 h-80 rounded-2xl border-2 border-cyan-500 shadow-2xl">
+                    <!-- 3D Profile Picture -->
+                    <div class="flex-1 flex justify-center md:order-2">
+                        <div class="profile-3d">
+                            <img src="https://media.licdn.com/dms/image/v2/D4D03AQF_wlATDTRqpw/profile-displayphoto-scale_400_400/B4DZn1lHvYJUAg-/0/1760761774987?e=1776902400&v=beta&t=A5O0iygGdZSzSZdAd66A0ikz16lkzL8E-OAZxSwh7hY" alt="Aryan Tiwari">
+                        </div>
                     </div>
                 </div>
 
-                <!-- Quick Stats -->
+                <!-- Quick Stats with 3D Effect -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
-                    <div class="card-glass card-hover p-4 rounded-lg text-center">
-                        <div class="text-3xl font-bold gradient-text">8+</div>
+                    <div class="card-glass card-3d card-hover p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold gradient-text stat-counter">8+</div>
                         <div class="text-sm text-slate-400 mt-1">Years Crypto</div>
                     </div>
-                    <div class="card-glass card-hover p-4 rounded-lg text-center">
-                        <div class="text-3xl font-bold gradient-text">20</div>
+                    <div class="card-glass card-3d card-hover p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold gradient-text stat-counter">20</div>
                         <div class="text-sm text-slate-400 mt-1">Years Old</div>
                     </div>
-                    <div class="card-glass card-hover p-4 rounded-lg text-center">
-                        <div class="text-3xl font-bold gradient-text">7+</div>
+                    <div class="card-glass card-3d card-hover p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold gradient-text stat-counter">7+</div>
                         <div class="text-sm text-slate-400 mt-1">Languages</div>
                     </div>
-                    <div class="card-glass card-hover p-4 rounded-lg text-center">
-                        <div class="text-3xl font-bold gradient-text">100%</div>
-                        <div class="text-sm text-slate-400 mt-1">Dedicated</div>
+                    <div class="card-glass card-3d card-hover p-4 rounded-lg text-center">
+                        <div class="text-3xl font-bold gradient-text stat-counter">∞</div>
+                        <div class="text-sm text-slate-400 mt-1">Learning</div>
                     </div>
                 </div>
             </div>
@@ -200,31 +331,31 @@
     <!-- About Section -->
     <section id="about" class="py-24 px-4 section-gradient border-b border-cyan-500/20">
         <div class="max-w-7xl mx-auto">
-            <div class="space-y-4 mb-16">
+            <div class="space-y-4 mb-16 fade-in">
                 <p class="text-cyan-400 font-semibold text-sm tracking-widest">PROFESSIONAL PROFILE</p>
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">About Me</h2>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white text-glow">About Me</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in">
                 <div class="space-y-6">
-                    <p class="text-slate-300 text-lg leading-relaxed">
+                    <p class="text-slate-300 text-lg leading-relaxed card-3d">
                         I am a 20-year-old blockchain developer and cryptocurrency expert with <span class="text-cyan-400 font-semibold">8+ years of experience</span> in the digital asset space. My journey in cryptocurrency started early, allowing me to develop deep technical knowledge and practical expertise in blockchain technologies.
                     </p>
 
-                    <p class="text-slate-300 text-lg leading-relaxed">
+                    <p class="text-slate-300 text-lg leading-relaxed card-3d">
                         Beyond cryptocurrency, I am a <span class="text-cyan-400 font-semibold">full-stack developer</span> with strong cybersecurity fundamentals, including hands-on experience with penetration testing tools. I combine security awareness with blockchain development to create robust, secure solutions.
                     </p>
 
-                    <p class="text-slate-300 text-lg leading-relaxed">
+                    <p class="text-slate-300 text-lg leading-relaxed card-3d">
                         My technical stack includes multiple programming languages, modern Web3 frameworks, and system-level tools. I am passionate about learning emerging technologies and staying at the forefront of the blockchain revolution.
                     </p>
 
-                    <div class="pt-4">
-                        <p class="text-cyan-400 font-semibold text-sm mb-2">Contact Information</p>
-                        <div class="space-y-2">
+                    <div class="pt-4 card-3d">
+                        <p class="text-cyan-400 font-semibold text-sm mb-3">Contact Information</p>
+                        <div class="space-y-3">
                             <p class="text-slate-400">
                                 <i class="fas fa-envelope text-cyan-400 mr-3 w-4"></i>
-                                <a href="mailto:tiwariji0028@gmail.com" class="hover:text-cyan-400 transition">tiwariji0028@gmail.com</a>
+                                <a href="mailto:tiwariji0028@gmail.com" class="hover:text-cyan-400 transition font-semibold">tiwariji0028@gmail.com</a>
                             </p>
                             <p class="text-slate-400">
                                 <i class="fas fa-map-marker-alt text-cyan-400 mr-3 w-4"></i>
@@ -232,25 +363,25 @@
                             </p>
                             <p class="text-slate-400">
                                 <i class="fab fa-linkedin text-cyan-400 mr-3 w-4"></i>
-                                <a href="https://www.linkedin.com/in/aryan-t-199014224" target="_blank" class="hover:text-cyan-400 transition">linkedin.com/in/aryan-t-199014224</a>
+                                <a href="https://www.linkedin.com/in/aryan-t-199014224" target="_blank" class="hover:text-cyan-400 transition font-semibold">linkedin.com/in/aryan-t-199014224</a>
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=600&fit=crop" alt="Blockchain Technology" class="rounded-xl border border-cyan-500/30 shadow-lg">
+                <div class="card-3d">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=600&fit=crop" alt="Blockchain Technology" class="rounded-xl border border-cyan-500/30 shadow-lg hover:shadow-2xl transition-all">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Technical Skills Section -->
-    <section id="expertise" class="py-24 px-4">
+    <section id="expertise" class="py-24 px-4 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="space-y-4 mb-16">
                 <p class="text-cyan-400 font-semibold text-sm tracking-widest">CORE COMPETENCIES</p>
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Technical Expertise</h2>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white text-glow">Technical Expertise</h2>
             </div>
 
             <!-- Programming Languages -->
@@ -273,7 +404,7 @@
                         <i class="fab fa-js-square mr-2"></i>JavaScript <span class="text-cyan-300 ml-1">★★★★☆</span>
                     </div>
                     <div class="skill-badge">
-                        <i class="fab fa-react mr-2"></i>Solidity <span class="text-cyan-300 ml-1">★★★★☆</span>
+                        <i class="fas fa-cube mr-2"></i>Solidity <span class="text-cyan-300 ml-1">★★★★☆</span>
                     </div>
                 </div>
             </div>
@@ -282,17 +413,17 @@
             <div class="mb-16">
                 <h3 class="font-display text-2xl font-bold text-white mb-6">Blockchain & Web3</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="card-glass card-hover p-6 rounded-xl">
+                    <div class="card-glass card-3d card-hover p-6 rounded-xl">
                         <div class="text-cyan-400 text-2xl mb-3"><i class="fas fa-cube"></i></div>
                         <h4 class="font-semibold text-white mb-2">Smart Contracts</h4>
                         <p class="text-slate-400 text-sm">Ethereum, Polygon, BNB Chain smart contract development and deployment</p>
                     </div>
-                    <div class="card-glass card-hover p-6 rounded-xl">
+                    <div class="card-glass card-3d card-hover p-6 rounded-xl">
                         <div class="text-cyan-400 text-2xl mb-3"><i class="fas fa-project-diagram"></i></div>
                         <h4 class="font-semibold text-white mb-2">DeFi Protocols</h4>
                         <p class="text-slate-400 text-sm">Decentralized Finance, lending protocols, liquidity pools, and AMM architecture</p>
                     </div>
-                    <div class="card-glass card-hover p-6 rounded-xl">
+                    <div class="card-glass card-3d card-hover p-6 rounded-xl">
                         <div class="text-cyan-400 text-2xl mb-3"><i class="fas fa-code-branch"></i></div>
                         <h4 class="font-semibold text-white mb-2">Web3 Frameworks</h4>
                         <p class="text-slate-400 text-sm">Ethers.js, Web3.js, Truffle, Hardhat, and modern Web3 development tools</p>
@@ -304,17 +435,17 @@
             <div class="mb-16">
                 <h3 class="font-display text-2xl font-bold text-white mb-6">Security & Cybersecurity</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="card-glass card-hover p-6 rounded-xl">
+                    <div class="card-glass card-3d card-hover p-6 rounded-xl">
                         <div class="text-cyan-400 text-2xl mb-3"><i class="fas fa-shield-alt"></i></div>
                         <h4 class="font-semibold text-white mb-2">Kali Linux</h4>
                         <p class="text-slate-400 text-sm">Penetration testing, security auditing, and ethical hacking tools</p>
                     </div>
-                    <div class="card-glass card-hover p-6 rounded-xl">
+                    <div class="card-glass card-3d card-hover p-6 rounded-xl">
                         <div class="text-cyan-400 text-2xl mb-3"><i class="fas fa-lock"></i></div>
                         <h4 class="font-semibold text-white mb-2">Smart Contract Auditing</h4>
                         <p class="text-slate-400 text-sm">Vulnerability assessment, security best practices, code optimization</p>
                     </div>
-                    <div class="card-glass card-hover p-6 rounded-xl">
+                    <div class="card-glass card-3d card-hover p-6 rounded-xl">
                         <div class="text-cyan-400 text-2xl mb-3"><i class="fas fa-network-wired"></i></div>
                         <h4 class="font-semibold text-white mb-2">Network Security</h4>
                         <p class="text-slate-400 text-sm">Cryptography, network protocols, and secure communication systems</p>
@@ -339,18 +470,18 @@
 
             <!-- Technical Skills Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="card-glass card-hover p-6 rounded-xl">
-                    <div class="skill-icon text-3xl mb-4">💻</div>
+                <div class="card-glass card-3d card-hover p-6 rounded-xl">
+                    <div class="text-3xl mb-4">💻</div>
                     <h4 class="font-semibold text-white mb-2">Full-Stack Development</h4>
                     <p class="text-slate-400 text-sm">Frontend (React, Vue), Backend (Node.js, Python), Databases (SQL, NoSQL)</p>
                 </div>
-                <div class="card-glass card-hover p-6 rounded-xl">
-                    <div class="skill-icon text-3xl mb-4">⛓️</div>
+                <div class="card-glass card-3d card-hover p-6 rounded-xl">
+                    <div class="text-3xl mb-4">⛓️</div>
                     <h4 class="font-semibold text-white mb-2">Blockchain Architecture</h4>
                     <p class="text-slate-400 text-sm">Consensus mechanisms, distributed systems, cryptographic hashing</p>
                 </div>
-                <div class="card-glass card-hover p-6 rounded-xl">
-                    <div class="skill-icon text-3xl mb-4">📊</div>
+                <div class="card-glass card-3d card-hover p-6 rounded-xl">
+                    <div class="text-3xl mb-4">📊</div>
                     <h4 class="font-semibold text-white mb-2">Data Analysis</h4>
                     <p class="text-slate-400 text-sm">Technical analysis, charting, statistical modeling, pattern recognition</p>
                 </div>
@@ -359,11 +490,11 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-24 px-4 section-gradient border-b border-cyan-500/20">
+    <section id="experience" class="py-24 px-4 section-gradient border-b border-cyan-500/20 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="space-y-4 mb-16">
                 <p class="text-cyan-400 font-semibold text-sm tracking-widest">BACKGROUND</p>
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Experience & Journey</h2>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white text-glow">Experience & Journey</h2>
             </div>
 
             <div class="max-w-4xl">
@@ -405,25 +536,25 @@
             </div>
 
             <!-- Education -->
-            <div class="mt-12 pt-12 border-t border-cyan-500/20">
+            <div class="mt-12 pt-12 border-t border-cyan-500/20 fade-in">
                 <h3 class="font-display text-2xl font-bold text-white mb-8">Education & Certifications</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="card-glass p-6 rounded-xl">
+                    <div class="card-glass card-3d p-6 rounded-xl">
                         <p class="text-cyan-400 font-semibold text-sm mb-2">Self-Taught</p>
                         <p class="font-semibold text-white mb-1">Blockchain & Cryptocurrency</p>
                         <p class="text-slate-400 text-sm">Through online courses, documentation, and hands-on projects</p>
                     </div>
-                    <div class="card-glass p-6 rounded-xl">
+                    <div class="card-glass card-3d p-6 rounded-xl">
                         <p class="text-cyan-400 font-semibold text-sm mb-2">Programming</p>
                         <p class="font-semibold text-white mb-1">Multiple Languages</p>
                         <p class="text-slate-400 text-sm">Python, Java, C++, C, JavaScript/Web Technologies</p>
                     </div>
-                    <div class="card-glass p-6 rounded-xl">
+                    <div class="card-glass card-3d p-6 rounded-xl">
                         <p class="text-cyan-400 font-semibold text-sm mb-2">Security & Cybersecurity</p>
                         <p class="font-semibold text-white mb-1">Kali Linux & Ethical Hacking</p>
                         <p class="text-slate-400 text-sm">Penetration testing, vulnerability assessment, security auditing</p>
                     </div>
-                    <div class="card-glass p-6 rounded-xl">
+                    <div class="card-glass card-3d p-6 rounded-xl">
                         <p class="text-cyan-400 font-semibold text-sm mb-2">Web3 & DeFi</p>
                         <p class="font-semibold text-white mb-1">Advanced Topics</p>
                         <p class="text-slate-400 text-sm">Smart contracts, DeFi protocols, decentralized applications</p>
@@ -434,15 +565,15 @@
     </section>
 
     <!-- Featured Content -->
-    <section class="py-24 px-4">
+    <section class="py-24 px-4 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="space-y-4 mb-16">
                 <p class="text-cyan-400 font-semibold text-sm tracking-widest">LEARNING RESOURCES</p>
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Featured Educational Content</h2>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white text-glow">Featured Educational Content</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="rounded-xl overflow-hidden border border-cyan-500/30 card-hover">
+                <div class="rounded-xl overflow-hidden border border-cyan-500/30 card-3d card-hover">
                     <div class="relative h-80 bg-slate-900">
                         <iframe class="w-full h-full" src="https://www.youtube.com/embed/mCy5NZBHqFc" title="Blockchain Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
@@ -452,7 +583,7 @@
                     </div>
                 </div>
 
-                <div class="rounded-xl overflow-hidden border border-cyan-500/30 card-hover">
+                <div class="rounded-xl overflow-hidden border border-cyan-500/30 card-3d card-hover">
                     <div class="relative h-80 bg-slate-900">
                         <iframe class="w-full h-full" src="https://www.youtube.com/embed/9V1bipPkCTU" title="Bitcoin Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
@@ -466,15 +597,15 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 px-4 section-gradient border-b border-cyan-500/20">
+    <section id="contact" class="py-24 px-4 section-gradient border-b border-cyan-500/20 fade-in">
         <div class="max-w-4xl mx-auto">
             <div class="space-y-4 mb-16 text-center">
                 <p class="text-cyan-400 font-semibold text-sm tracking-widest">GET IN TOUCH</p>
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-white">Let's Collaborate</h2>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white text-glow">Let's Collaborate</h2>
                 <p class="text-slate-400 text-lg">Ready to build innovative blockchain solutions and crypto projects</p>
             </div>
 
-            <div class="card-glass rounded-xl p-8 md:p-12">
+            <div class="card-glass card-3d rounded-xl p-8 md:p-12">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="text-center">
                         <div class="text-cyan-400 text-3xl mb-3"><i class="fas fa-envelope"></i></div>
@@ -485,7 +616,7 @@
                     </div>
 
                     <div class="text-center">
-                        <div class="text-cyan-400 text-3xl mb-3"><i class="fas fa-linkedin"></i></div>
+                        <div class="text-cyan-400 text-3xl mb-3"><i class="fab fa-linkedin"></i></div>
                         <p class="text-slate-400 text-sm mb-2">LinkedIn</p>
                         <a href="https://www.linkedin.com/in/aryan-t-199014224" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold">
                             Connect on LinkedIn
@@ -517,12 +648,12 @@
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 py-8 px-4">
+    <footer class="border-t border-slate-800 py-8 px-4 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 <div>
                     <h3 class="font-display font-bold text-white mb-4">Aryan Tiwari</h3>
-                    <p class="text-slate-400 text-sm">Blockchain Developer & Cryptocurrency Expert</p>
+                    <p class="text-slate-400 text-sm">Blockchain Developer & Cryptocurrency Expert | 8+ Years Experience</p>
                 </div>
                 <div>
                     <h3 class="font-semibold text-white mb-4">Quick Links</h3>
@@ -552,6 +683,40 @@
     </footer>
 
     <script>
+        // 3D Mouse Movement Effect
+        function handleMouseMove(event) {
+            const cards = document.querySelectorAll('.card-3d');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = `${Math.random() * 0.3}s`;
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -560,6 +725,15 @@
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
+            });
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const parallaxElements = document.querySelectorAll('.parallax-card');
+            parallaxElements.forEach(el => {
+                const scrollPosition = window.pageYOffset;
+                el.style.transform = `translateY(${scrollPosition * 0.5}px)`;
             });
         });
     </script>
