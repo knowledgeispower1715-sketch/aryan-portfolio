@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aryan Tiwari - Crypto & Blockchain Developer</title>
+    <title>Aryan Tiwari - Blockchain Developer & Crypto Analyst</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,24 +12,41 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #0a0e27;
+            --secondary: #1a1f3a;
+            --accent: #00d9ff;
+            --accent-light: #00f0ff;
+            --text: #e0e0e0;
+            --text-light: #a0a0a0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            font-family: 'Courier New', monospace;
             line-height: 1.6;
-            color: #333;
-            background: #f9f9f9;
+            overflow-x: hidden;
         }
 
-        header {
-            background: #fff;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
+        /* Navigation */
         nav {
-            max-width: 1200px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
             display: flex;
@@ -37,257 +55,500 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: #0066ff;
+            background: linear-gradient(45deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 3rem;
         }
 
         .nav-links a {
+            color: var(--text);
             text-decoration: none;
-            color: #333;
-            transition: color 0.3s;
             font-size: 0.95rem;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
         }
 
         .nav-links a:hover {
-            color: #0066ff;
+            color: var(--accent);
         }
 
-        section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
-            color: #fff;
+            margin-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-30px) translateX(20px); }
+            50% { transform: translateY(-60px) translateX(-20px); }
+            75% { transform: translateY(-30px) translateX(20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
             text-align: center;
-            padding: 6rem 2rem;
+            max-width: 900px;
+            padding: 2rem;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            line-height: 1.2;
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto 2rem;
+        .hero h1 span {
+            background: linear-gradient(45deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .cta-button {
-            display: inline-block;
-            background: #fff;
-            color: #0066ff;
-            padding: 0.75rem 2rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            display: inline-block;
+            text-transform: uppercase;
+            font-weight: 600;
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent), var(--accent-light));
+            color: var(--primary);
+            border: 2px solid var(--accent);
         }
 
-        .about h2,
-        .skills h2,
-        .contact h2 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: #0066ff;
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.3);
         }
 
-        .about p {
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+        }
+
+        /* Sections */
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
             font-size: 1.1rem;
-            line-height: 1.8;
-            max-width: 700px;
-            color: #555;
+            margin-bottom: 4rem;
+            margin-top: 2rem;
+            max-width: 600px;
         }
 
-        .info-grid {
+        /* About Section */
+        .about {
+            background: var(--secondary);
+        }
+
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 2rem;
         }
 
-        .info-item {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #0066ff;
+        .stat {
+            background: rgba(0, 217, 255, 0.05);
+            padding: 2rem;
+            border-left: 3px solid var(--accent);
+            border-radius: 5px;
         }
 
-        .info-item h3 {
-            color: #0066ff;
+        .stat-value {
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
-        .info-item p {
-            color: #666;
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
         }
 
+        /* Skills Section */
         .skills {
-            background: #fff;
+            background: var(--primary);
         }
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
         .skill-card {
-            background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
-            color: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 600;
-            transition: transform 0.3s;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 217, 255, 0.05));
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            padding: 2.5rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
         }
 
         .skill-card:hover {
-            transform: translateY(-5px);
+            border-color: var(--accent);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.1);
         }
 
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .skill-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
         .contact {
-            background: #f9f9f9;
+            background: var(--secondary);
             text-align: center;
         }
 
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
         .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 2rem;
-            align-items: center;
+            margin-top: 3rem;
         }
 
         .contact-item {
+            margin-bottom: 2rem;
             font-size: 1.1rem;
         }
 
         .contact-item a {
-            color: #0066ff;
+            color: var(--accent);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 3px;
         }
 
         .contact-item a:hover {
-            color: #00d4ff;
+            border-bottom-color: var(--accent);
         }
 
+        /* Footer */
         footer {
-            background: #333;
-            color: #fff;
+            background: var(--primary);
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+            padding: 3rem 2rem;
             text-align: center;
-            padding: 2rem;
+            color: var(--text-light);
             font-size: 0.9rem;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
-            .hero p {
+            .hero-subtitle {
                 font-size: 1rem;
             }
 
             .nav-links {
-                gap: 1rem;
+                gap: 1.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
             }
 
             section {
-                padding: 2rem 1rem;
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
+    <nav>
+        <div class="nav-container">
             <div class="logo">AT</div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <section class="hero">
-        <h1>Aryan Tiwari</h1>
-        <p>Crypto Investor | Blockchain Developer | Trading Analyst</p>
-        <p style="font-size: 1rem; opacity: 0.8; margin-top: 1rem;">Based in Jabalpur, Madhya Pradesh | Age 20</p>
-        <a href="#contact" class="cta-button">Get In Touch</a>
+        <div class="hero-content">
+            <h1>ARYAN <span>TIWARI</span></h1>
+            <p class="hero-subtitle">Blockchain Developer | Crypto Analyst | Trading Specialist</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="#skills" class="btn btn-secondary">View Skills</a>
+            </div>
+        </div>
     </section>
 
     <section class="about" id="about">
-        <h2>About Me</h2>
-        <p>
-            I'm a passionate crypto investor, blockchain developer, and trading analyst. I'm deeply fascinated by emerging technologies
-            and constantly learning new technical skills in the blockchain space. With a focus on cryptocurrency mining and trading analysis,
-            I combine technical knowledge with practical experience to navigate the digital asset landscape.
-        </p>
+        <h2 class="section-title">About</h2>
+        <p class="section-subtitle">20 Years Old | Jabalpur, Madhya Pradesh, India</p>
 
-        <div class="info-grid">
-            <div class="info-item">
-                <h3>Age</h3>
-                <p>20 years old</p>
+        <div class="about-grid">
+            <div>
+                <div class="about-text">
+                    <p>
+                        I'm a blockchain developer and crypto analyst with a passion for emerging technologies.
+                        Specializing in cryptocurrency trading, mining analysis, and blockchain development.
+                    </p>
+                    <p>
+                        My expertise spans across multiple domains including smart contract development, trading algorithms,
+                        and cryptocurrency mining optimization. I'm constantly learning new technologies and staying updated
+                        with the latest developments in the crypto ecosystem.
+                    </p>
+                </div>
             </div>
-            <div class="info-item">
-                <h3>Location</h3>
-                <p>Jabalpur, Madhya Pradesh, India</p>
-            </div>
-            <div class="info-item">
-                <h3>Focus</h3>
-                <p>Blockchain & Cryptocurrency</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">20</div>
+                    <div class="stat-label">Age</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">5+</div>
+                    <div class="stat-label">Skills</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">India</div>
+                    <div class="stat-label">Location</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Learning</div>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="skills" id="skills">
-        <h2>Skills & Expertise</h2>
+        <h2 class="section-title">Skills & Expertise</h2>
+        <p class="section-subtitle">Technologies and domains I work with</p>
+
         <div class="skills-grid">
-            <div class="skill-card">Cryptocurrency</div>
-            <div class="skill-card">Trading</div>
-            <div class="skill-card">Blockchain</div>
-            <div class="skill-card">Mining Analysis</div>
-            <div class="skill-card">Programming</div>
-            <div class="skill-card">Technical Analysis</div>
+            <div class="skill-card">
+                <div class="skill-icon">₿</div>
+                <div class="skill-name">Cryptocurrency</div>
+                <div class="skill-desc">Deep knowledge of digital assets, wallets, exchanges, and blockchain networks</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📊</div>
+                <div class="skill-name">Trading & Analysis</div>
+                <div class="skill-desc">Technical analysis, market trends, trading strategies, and risk management</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">⛓️</div>
+                <div class="skill-name">Blockchain</div>
+                <div class="skill-desc">Smart contracts, DeFi protocols, and blockchain architecture</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">⚙️</div>
+                <div class="skill-name">Mining</div>
+                <div class="skill-desc">Cryptocurrency mining optimization, pool management, and analysis</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <div class="skill-name">Programming</div>
+                <div class="skill-desc">Full-stack development with modern web3 technologies</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🔬</div>
+                <div class="skill-name">Technical Analysis</div>
+                <div class="skill-desc">Market analysis, chart patterns, indicators, and price prediction models</div>
+            </div>
         </div>
     </section>
 
     <section class="contact" id="contact">
-        <h2>Get In Touch</h2>
-        <div class="contact-info">
-            <div class="contact-item">
-                <strong>Email:</strong> <a href="mailto:tiwariji0028@gmail.com">tiwariji0028@gmail.com</a>
-            </div>
-            <div class="contact-item">
-                <p>Feel free to reach out for collaborations or just a friendly chat about crypto and technology!</p>
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle">Let's collaborate and build something amazing</p>
+
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    📧 <a href="mailto:tiwariji0028@gmail.com">tiwariji0028@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    💬 Open to discussions about crypto, blockchain, trading, and tech
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Aryan Tiwari. All rights reserved. | Passionate about technology and continuous learning</p>
+        <p>&copy; 2026 Aryan Tiwari. All rights reserved. | Blockchain Developer & Crypto Analyst</p>
     </footer>
 </body>
 </html>
