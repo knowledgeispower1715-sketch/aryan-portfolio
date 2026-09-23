@@ -1,11 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 
 export interface MetallicButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  href?: string;
+  target?: string;
+  rel?: string;
   asChild?: boolean;
   variant?: "silver" | "dark" | "cyan";
   size?: "default" | "sm" | "lg";
@@ -17,13 +19,14 @@ export const MetallicButton = React.forwardRef<HTMLButtonElement, MetallicButton
       className,
       variant = "dark",
       size = "default",
-      asChild = false,
+      href,
+      target,
+      rel,
       children,
       ...props
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : "button";
     const [isPressed, setIsPressed] = React.useState(false);
     const [isTouchDevice, setIsTouchDevice] = React.useState(false);
 
@@ -62,26 +65,8 @@ export const MetallicButton = React.forwardRef<HTMLButtonElement, MetallicButton
 
     const currentVariant = variantStyles[variant];
 
-    return (
-      <Comp
-        ref={ref}
-        onMouseDown={() => setIsPressed(true)}
-        onMouseUp={() => setIsPressed(false)}
-        onMouseLeave={() => setIsPressed(false)}
-        onTouchStart={() => setIsPressed(true)}
-        onTouchEnd={() => setIsPressed(false)}
-        className={cn(
-          "relative inline-flex items-center justify-center font-medium tracking-wide transition-all duration-200 select-none overflow-hidden cursor-pointer",
-          sizeClasses[size],
-          currentVariant.container,
-          currentVariant.text,
-          isPressed
-            ? "scale-[0.97] translate-y-0.5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.7)]"
-            : !isTouchDevice && "hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(0,0,0,0.7)]",
-          className
-        )}
-        {...props}
-      >
+    const innerContent = (
+      <>
         {/* Metallic diagonal brushed light reflection */}
         <span
           className={cn(
@@ -99,7 +84,46 @@ export const MetallicButton = React.forwardRef<HTMLButtonElement, MetallicButton
         <span className="relative z-10 flex items-center gap-2">
           {children}
         </span>
-      </Comp>
+      </>
+    );
+
+    const commonClasses = cn(
+      "relative inline-flex items-center justify-center font-medium tracking-wide transition-all duration-200 select-none overflow-hidden cursor-pointer",
+      sizeClasses[size],
+      currentVariant.container,
+      currentVariant.text,
+      isPressed
+        ? "scale-[0.97] translate-y-0.5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.7)]"
+        : !isTouchDevice && "hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(0,0,0,0.7)]",
+      className
+    );
+
+    if (href) {
+      return (
+        <a
+          href={href}
+          target={target}
+          rel={rel}
+          className={commonClasses}
+        >
+          {innerContent}
+        </a>
+      );
+    }
+
+    return (
+      <button
+        ref={ref}
+        onMouseDown={() => setIsPressed(true)}
+        onMouseUp={() => setIsPressed(false)}
+        onMouseLeave={() => setIsPressed(false)}
+        onTouchStart={() => setIsPressed(true)}
+        onTouchEnd={() => setIsPressed(false)}
+        className={commonClasses}
+        {...props}
+      >
+        {innerContent}
+      </button>
     );
   }
 );

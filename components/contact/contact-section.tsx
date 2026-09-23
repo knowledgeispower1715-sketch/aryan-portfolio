@@ -18,168 +18,140 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-36 px-6 bg-[#050507] border-t border-white/[0.06] overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(0,217,255,0.06)_0%,transparent_70%)] pointer-events-none" />
+    <section
+      id="transmission"
+      className="relative py-32 px-6 sm:px-10 lg:px-16 bg-[#050507] border-t border-white/[0.08] overflow-hidden"
+    >
+      {/* Background Ambience */}
+      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,217,255,0.04)_0%,transparent_70%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Top Tag */}
-        <Reveal>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-8 h-px bg-[#00d9ff]" />
-            <span className="font-mono text-xs text-[#00d9ff] uppercase tracking-widest">
-              Final Scene · Inquiries & Transmission
-            </span>
-          </div>
-        </Reveal>
+        {/* Terminal Header Tag */}
+        <div className="text-center mb-12">
+          <Reveal>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.1] font-mono text-xs text-[#00d9ff] uppercase tracking-wider mb-6">
+              <Terminal className="w-3.5 h-3.5" />
+              <span>DIRECT TRANSMISSION CHANNEL // 06</span>
+            </div>
+          </Reveal>
 
-        {/* Large Editorial Headline */}
-        <div className="mb-20">
           <Reveal delay={0.1}>
-            <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.04em] leading-[0.95] text-[#f0f0f0]">
-              LET&apos;S BUILD
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white uppercase leading-none mb-6">
+              Let&apos;s Build Something
               <br />
-              SOMETHING{" "}
-              <span className="bg-gradient-to-r from-[#00d9ff] via-[#38bdf8] to-[#8b5cf6] bg-clip-text text-transparent">
-                RESILIENT.
+              <span className="bg-gradient-to-r from-[#00d9ff] via-white to-[#8b5cf6] bg-clip-text text-transparent">
+                Uncompromising & Resilient.
               </span>
             </h2>
           </Reveal>
+
+          <Reveal delay={0.2}>
+            <p className="max-w-xl mx-auto text-base sm:text-lg text-[#9ca3af] font-normal leading-relaxed">
+              Available for high-stakes blockchain engineering, EVM protocol architecture, DeFi security audits, and penetration testing.
+            </p>
+          </Reveal>
         </div>
 
-        {/* Interactive Communication Console */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-          {/* Left: Email & Terminal Card */}
-          <div className="lg:col-span-7 flex flex-col justify-between p-8 sm:p-12 rounded-3xl bg-[#0c0e14] border border-white/[0.1] shadow-2xl relative overflow-hidden">
-            {/* Specular top border */}
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00d9ff]/30 to-transparent" />
+        {/* Central Cryptographic Terminal Interface */}
+        <div className="max-w-3xl mx-auto rounded-3xl border border-white/[0.14] bg-[#0c0e14]/90 backdrop-blur-2xl p-8 sm:p-12 shadow-[0_24px_80px_rgba(0,0,0,0.8)] relative overflow-hidden">
+          {/* Top highlight */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00d9ff]/50 to-transparent" />
 
-            <div>
-              <div className="flex items-center justify-between pb-6 mb-8 border-b border-white/[0.06]">
-                <div className="flex items-center gap-2">
-                  <Terminal className="w-4 h-4 text-[#00d9ff]" />
-                  <span className="font-mono text-xs text-[#9ca3af] uppercase">
-                    direct_transmission
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Available for Projects</span>
-                </div>
-              </div>
-
-              <div className="mb-8">
-                <span className="text-xs font-mono text-[#6b7280] uppercase tracking-wider block mb-2">
-                  Primary Contact Address
-                </span>
-                <div className="text-xl sm:text-2xl md:text-3xl font-mono font-bold text-[#f0f0f0] break-all select-all">
-                  {personalInfo.email}
-                </div>
-              </div>
+          {/* Terminal Console Header */}
+          <div className="flex items-center justify-between pb-5 border-b border-white/[0.08] font-mono text-xs text-[#6b7280]">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-white font-semibold">CHANNEL: ENCRYPTED // READY</span>
             </div>
-
-            {/* Action Bar */}
-            <div className="pt-8 border-t border-white/[0.06] flex flex-wrap items-center gap-4">
-              <MetallicButton
-                variant="cyan"
-                size="default"
-                onClick={handleCopyEmail}
-                className="group"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-4 h-4 text-emerald-950" />
-                    <span>Coordinates Copied</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4" />
-                    <span>Copy Address</span>
-                  </>
-                )}
-              </MetallicButton>
-
-              <LiquidButton
-                variant="default"
-                size="default"
-                onClick={() => {
-                  window.location.href = `mailto:${personalInfo.email}`;
-                }}
-              >
-                <Mail className="w-4 h-4" />
-                <span>Launch Mail Client</span>
-              </LiquidButton>
-            </div>
+            <span className="text-[#00d9ff]">SEC_VERIFIED: 100%</span>
           </div>
 
-          {/* Right: Verified Channels & Focus Roles */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-6">
-            {/* Social Verified Links */}
-            <div className="p-8 rounded-3xl bg-[#0c0e14] border border-white/[0.08] shadow-xl flex flex-col gap-4">
-              <span className="font-mono text-xs text-[#00d9ff] uppercase tracking-widest mb-2 block">
-                Verified Networks
+          {/* Interactive Direct Email Interface */}
+          <div className="my-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 rounded-2xl bg-[#050507] border border-white/[0.1]">
+            <div className="flex items-center gap-3.5 pl-2 overflow-hidden">
+              <Mail className="w-5 h-5 text-[#00d9ff] shrink-0" />
+              <span className="font-mono text-sm sm:text-base text-white tracking-wide truncate">
+                {personalInfo.email}
               </span>
-
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#00d9ff]/40 hover:bg-white/[0.04] transition-all"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-white/[0.04] text-[#00d9ff]">
-                    <LinkedInIcon className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="font-mono text-sm font-semibold text-[#f0f0f0] group-hover:text-[#00d9ff] transition-colors">
-                      LinkedIn
-                    </div>
-                    <div className="text-[11px] text-[#6b7280] font-mono">
-                      /in/aryan-t-199014224
-                    </div>
-                  </div>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-[#6b7280] group-hover:text-[#00d9ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-              </a>
-
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#00d9ff]/40 hover:bg-white/[0.04] transition-all"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-white/[0.04] text-[#00d9ff]">
-                    <GitHubIcon className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="font-mono text-sm font-semibold text-[#f0f0f0] group-hover:text-[#00d9ff] transition-colors">
-                      GitHub
-                    </div>
-                    <div className="text-[11px] text-[#6b7280] font-mono">
-                      @knowledgeispower1715-sketch
-                    </div>
-                  </div>
-                </div>
-                <ArrowUpRight className="w-4 h-4 text-[#6b7280] group-hover:text-[#00d9ff] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-              </a>
             </div>
 
-            {/* Engagement Domains Pill Card */}
-            <div className="p-8 rounded-3xl bg-[#0c0e14] border border-white/[0.08] shadow-xl">
-              <span className="font-mono text-xs text-[#00d9ff] uppercase tracking-widest mb-3 block">
-                Collaboration Scopes
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {availability.roles.map((role) => (
-                  <span
-                    key={role}
-                    className="px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/[0.06] text-xs font-mono text-[#cbd5e1]"
-                  >
-                    {role}
-                  </span>
-                ))}
-              </div>
+            <button
+              onClick={handleCopyEmail}
+              className={`px-4 py-2.5 rounded-xl font-mono text-xs font-semibold tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                copied
+                  ? "bg-emerald-500 text-black shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+                  : "bg-white/[0.08] text-white hover:bg-white/[0.15] border border-white/[0.1]"
+              }`}
+              data-cursor="copy"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-4 h-4" />
+                  <span>COPIED TO CLIPBOARD</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-4 h-4" />
+                  <span>COPY DISPATCH EMAIL</span>
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* Dual Action Triggers: Liquid Glass + Metallic Hardware */}
+          <div className="flex flex-wrap items-center justify-center gap-5 pt-2">
+            <LiquidButton
+              variant="cyan"
+              size="lg"
+              href={`mailto:${personalInfo.email}`}
+              data-cursor="transmit"
+            >
+              <Mail className="w-4 h-4 text-black" />
+              <span>LAUNCH MAIL CLIENT</span>
+              <ArrowUpRight className="w-4 h-4 text-black/70" />
+            </LiquidButton>
+
+            <MetallicButton
+              variant="silver"
+              size="lg"
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="open"
+            >
+              <LinkedInIcon className="w-4 h-4 text-black" />
+              <span>LINKEDIN DISPATCH</span>
+              <ArrowUpRight className="w-4 h-4 text-black" />
+            </MetallicButton>
+
+            <MetallicButton
+              variant="dark"
+              size="lg"
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="open"
+            >
+              <GitHubIcon className="w-4 h-4 text-white" />
+              <span>GITHUB REPOSITORIES</span>
+              <ArrowUpRight className="w-4 h-4 text-white/70" />
+            </MetallicButton>
+          </div>
+
+          {/* Open Collaboration Roles */}
+          <div className="mt-10 pt-6 border-t border-white/[0.08] text-center">
+            <span className="font-mono text-[11px] text-[#6b7280] uppercase tracking-wider block mb-3">
+              ACTIVE ENGAGEMENT CAPABILITIES
+            </span>
+            <div className="flex flex-wrap justify-center gap-2">
+              {availability.roles.map((role) => (
+                <span
+                  key={role}
+                  className="px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-[#9ca3af]"
+                >
+                  {role}
+                </span>
+              ))}
             </div>
           </div>
         </div>

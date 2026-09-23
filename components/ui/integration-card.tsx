@@ -65,10 +65,10 @@ interface VisualContainerProps {
 }
 
 interface TeamCardProps {
-  visual: React.ReactNode;
-  title: string;
-  description: string;
-  url: string;
+  visual?: React.ReactNode;
+  title?: string;
+  description?: string;
+  url?: string;
 }
 
 interface IntegrationItem {
@@ -386,10 +386,10 @@ export function VisualContainer({ children, className }: VisualContainerProps) {
 }
 
 export const IntegrationCard = ({
-  visual,
-  title,
-  description,
-  url,
+  visual = <Integration />,
+  title = "Unified Design-Engineering Pipeline",
+  description = "Synchronizing Figma design tokens with Claude AI, React 19, Motion, and Tailwind CSS for production Web3 systems.",
+  url = "#ecosystem",
 }: TeamCardProps) => {
   return (
     <Card className="mx-auto flex w-full flex-col sm:max-w-141 rounded-2xl overflow-hidden p-0 ring-0 border gap-0">
