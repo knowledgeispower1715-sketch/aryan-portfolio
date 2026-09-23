@@ -2,10 +2,10 @@
 
 import * as React from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { navItems, availability } from "@/data/portfolio-data";
-import type { NavItem } from "@/data/portfolio-data";
+import { navItems, personalInfo, availability } from "@/data/portfolio-data";
+import { LiquidButton } from "@/components/ui/liquid-glass-button";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -14,7 +14,7 @@ export function Navbar() {
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -31,7 +31,7 @@ export function Navbar() {
           }
         });
       },
-      { rootMargin: "-50% 0px -50% 0px" }
+      { rootMargin: "-30% 0px -50% 0px" }
     );
 
     const sections = document.querySelectorAll("section[id]");
@@ -40,191 +40,159 @@ export function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  React.useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsMobileMenuOpen(false);
-      }
-    };
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleEscape);
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleEscape);
-    };
-  }, [isMobileMenuOpen]);
-
   return (
-    <>
-      <nav
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 pt-4 px-4 sm:px-6">
+      <div
         className={cn(
-          "fixed top-0 z-50 w-full transition-all duration-300 h-16 md:h-18 flex items-center",
+          "max-w-5xl mx-auto flex items-center justify-between px-5 py-2.5 rounded-full transition-all duration-500",
           isScrolled
-            ? "bg-[#050507]/80 backdrop-blur-md border-b border-[rgba(255,255,255,0.06)]"
-            : "bg-transparent"
+            ? "bg-[#050507]/80 backdrop-blur-2xl border border-white/[0.1] shadow-[0_16px_40px_rgba(0,0,0,0.6)]"
+            : "bg-transparent border border-transparent"
         )}
       >
-        <div className="container mx-auto px-6 w-full flex items-center justify-between h-full">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#00d9ff] rounded">
-            <span className="text-xl font-bold bg-gradient-to-r from-[#00d9ff] to-[#8b5cf6] bg-clip-text text-transparent">
+        {/* Brand Monogram */}
+        <a
+          href="#"
+          className="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d9ff] rounded-full"
+          aria-label="Back to top"
+        >
+          <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-white/[0.06] border border-white/[0.15] group-hover:border-[#00d9ff]/50 transition-colors">
+            <span className="font-mono text-xs font-bold tracking-tight text-[#f0f0f0] group-hover:text-[#00d9ff] transition-colors">
               AT
             </span>
-            <span className="text-xs uppercase tracking-widest font-mono text-[#f0f0f0] hidden sm:block">
-              Aryan Tiwari
+            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#00d9ff] shadow-[0_0_8px_#00d9ff]" />
+          </div>
+          <div className="hidden sm:flex flex-col text-left">
+            <span className="font-mono text-xs font-semibold tracking-wider text-[#f0f0f0] uppercase">
+              {personalInfo.name}
             </span>
-          </a>
+            <span className="text-[10px] text-[#6b7280] font-mono">
+              Web3 & Security
+            </span>
+          </div>
+        </a>
 
-          {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-8">
-            {navItems.map((item: NavItem) => (
-              <li key={item.label}>
+        {/* Desktop Navigation Links */}
+        <nav className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/[0.06] px-3 py-1.5 rounded-full backdrop-blur-md">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.href;
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                className={cn(
+                  "relative px-4 py-1.5 text-xs font-mono tracking-wider transition-colors rounded-full uppercase",
+                  isActive
+                    ? "text-[#f0f0f0] font-semibold"
+                    : "text-[#6b7280] hover:text-[#f0f0f0]"
+                )}
+                onClick={(e) => {
+                  if (item.href.startsWith("#")) {
+                    e.preventDefault();
+                    document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
+                {item.label}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavIndicator"
+                    className="absolute inset-0 rounded-full bg-white/[0.08] border border-[#00d9ff]/30 shadow-[0_0_12px_rgba(0,217,255,0.15)]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* Right CTA */}
+        <div className="flex items-center gap-3">
+          {/* Availability Radar */}
+          {availability.status === "open" && (
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/[0.08] border border-emerald-500/20 text-[11px] font-mono text-emerald-400">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span>Available</span>
+            </div>
+          )}
+
+          {/* Liquid Glass CTA */}
+          <LiquidButton
+            size="sm"
+            variant="cyan"
+            onClick={() => {
+              document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="hidden sm:inline-flex"
+          >
+            <span>Initiate</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </LiquidButton>
+
+          {/* Mobile Menu Button */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden flex items-center justify-center w-9 h-9 rounded-full bg-white/[0.06] border border-white/[0.12] text-[#f0f0f0] focus:outline-none focus:ring-2 focus:ring-[#00d9ff]"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden mt-3 max-w-5xl mx-auto p-6 rounded-3xl bg-[#0c0e14]/95 backdrop-blur-2xl border border-white/[0.12] shadow-2xl flex flex-col gap-4"
+          >
+            <div className="flex flex-col gap-2">
+              {navItems.map((item) => (
                 <a
+                  key={item.label}
                   href={item.href}
-                  className={cn(
-                    "text-sm font-medium transition-colors hover:text-[#f0f0f0] relative py-2 focus:outline-none focus:ring-2 focus:ring-[#00d9ff] rounded block",
-                    activeSection === item.href
-                      ? "text-[#f0f0f0]"
-                      : "text-[#6b7280]"
-                  )}
+                  className="px-4 py-3 rounded-xl font-mono text-sm uppercase tracking-wider text-[#f0f0f0] hover:bg-white/[0.06] transition-colors"
                   onClick={(e) => {
-                    if (item.href.startsWith('#')) {
+                    if (item.href.startsWith("#")) {
                       e.preventDefault();
-                      document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
+                      setIsMobileMenuOpen(false);
+                      document.querySelector(item.href)?.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
                 >
                   {item.label}
-                  {activeSection === item.href && (
-                    <motion.div
-                      layoutId="active-nav"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#00d9ff]"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
                 </a>
-              </li>
-            ))}
-          </ul>
-
-          <div className="hidden md:flex items-center gap-6">
-            {/* Availability */}
-            {availability.status === 'open' && (
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                <span className="text-xs text-[#6b7280] font-mono">
-                  Open to opportunities
-                </span>
-              </div>
-            )}
-
-            {/* CTA */}
-            <a
-              href="#contact"
-              className="px-4 py-2 text-sm font-medium text-[#050507] bg-[#f0f0f0] rounded-lg hover:bg-[#00d9ff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00d9ff] flex items-center gap-2"
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Get in Touch <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            className="md:hidden p-2 text-[#f0f0f0] focus:outline-none focus:ring-2 focus:ring-[#00d9ff] rounded"
-            onClick={() => setIsMobileMenuOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "tween", ease: [0.25, 0.46, 0.45, 0.94], duration: 0.5 }}
-            className="fixed inset-0 z-[60] bg-[#0c0e14] md:hidden flex flex-col p-6"
-            role="dialog"
-            aria-modal="true"
-          >
-            <div className="flex items-center justify-between mb-12">
-              <span className="text-xl font-bold bg-gradient-to-r from-[#00d9ff] to-[#8b5cf6] bg-clip-text text-transparent">
-                AT
-              </span>
-              <button
-                className="p-2 text-[#f0f0f0] focus:outline-none focus:ring-2 focus:ring-[#00d9ff] rounded"
-                onClick={() => setIsMobileMenuOpen(false)}
-                aria-label="Close menu"
-              >
-                <X className="w-6 h-6" />
-              </button>
+              ))}
             </div>
 
-            <ul className="flex flex-col gap-6 flex-1">
-              {navItems.map((item: NavItem) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="text-2xl font-medium text-[#f0f0f0] focus:outline-none focus:ring-2 focus:ring-[#00d9ff] rounded inline-block"
-                    onClick={(e) => {
-                      if (item.href.startsWith('#')) {
-                        e.preventDefault();
-                        setIsMobileMenuOpen(false);
-                        setTimeout(() => {
-                          document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
-                        }, 300);
-                      }
-                    }}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Open for Collaboration</span>
+              </div>
 
-            <div className="mt-auto flex flex-col gap-6">
-              {availability.status === 'open' && (
-                <div className="flex items-center gap-2 justify-center mb-2">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                  </span>
-                  <span className="text-sm text-[#6b7280] font-mono">
-                    Open to opportunities
-                  </span>
-                </div>
-              )}
-              <a
-                href="#contact"
-                className="w-full py-4 text-center text-lg font-medium text-[#050507] bg-[#f0f0f0] rounded-xl hover:bg-[#00d9ff] transition-colors focus:outline-none focus:ring-2 focus:ring-[#00d9ff]"
-                onClick={(e) => {
-                  e.preventDefault();
+              <LiquidButton
+                size="sm"
+                variant="cyan"
+                onClick={() => {
                   setIsMobileMenuOpen(false);
-                  setTimeout(() => {
-                    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-                  }, 300);
+                  document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                Get in Touch
-              </a>
+                <span>Contact</span>
+              </LiquidButton>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 }

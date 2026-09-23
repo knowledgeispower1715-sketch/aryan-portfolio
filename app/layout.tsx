@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://aryan-portfolio.vercel.app"),
   title: "Aryan Tiwari | Blockchain Developer & Security Engineer",
   description:
     "Aryan Tiwari — Blockchain developer and security engineer with 8+ years in the cryptocurrency ecosystem. Specializing in smart contracts, DeFi, penetration testing, and Web3 solutions. Based in Jabalpur, India.",
@@ -86,7 +87,11 @@ const jsonLd = {
   ],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"

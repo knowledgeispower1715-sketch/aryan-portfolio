@@ -1,125 +1,169 @@
-"use client"
+"use client";
 
-import { projects } from '@/data/portfolio-data'
-import { FadeIn, Reveal, StaggerContainer, StaggerItem } from '@/components/motion/motion-wrapper'
-import { ArrowUpRight } from 'lucide-react'
-import { motion } from 'motion/react'
+import React from "react";
+import { ArrowUpRight, Shield, Layers, LineChart, Code2, Terminal } from "lucide-react";
+import { projects } from "@/data/portfolio-data";
+import { Reveal } from "@/components/motion/motion-wrapper";
+import { LiquidButton } from "@/components/ui/liquid-glass-button";
 
 export function ProjectsSection() {
-  const featuredProjects = projects.slice(0, 2)
-  const secondaryProjects = projects.slice(2, 4)
+  const projectIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+    "smart-contracts": Layers,
+    "security-suite": Shield,
+    "onchain-analytics": LineChart,
+    "web3-interfaces": Code2,
+  };
 
   return (
-    <section id="projects" className="py-24 md:py-32 bg-background">
-      <div className="max-w-6xl mx-auto px-6">
-        <Reveal>
-          <div className="mb-16">
-            <div className="flex items-center gap-4 mb-6">
-              <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">Projects</span>
-              <div className="h-[1px] w-12 bg-border"></div>
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground">
-              Selected work
-            </h2>
+    <section id="projects" className="relative py-32 px-6 bg-[#050507] border-t border-white/[0.06] overflow-hidden">
+      {/* Background radial accent */}
+      <div className="absolute top-1/3 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.03)_0%,transparent_70%)] pointer-events-none" />
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-24">
+          <div className="max-w-2xl">
+            <Reveal>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="w-8 h-px bg-[#00d9ff]" />
+                <span className="font-mono text-xs text-[#00d9ff] uppercase tracking-widest">
+                  Featured Case Studies
+                </span>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.1}>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#f0f0f0] leading-none">
+                Engineering Selected Work
+              </h2>
+            </Reveal>
           </div>
-        </Reveal>
 
-        <div className="flex flex-col gap-12 md:gap-16">
-          {/* Featured Projects */}
-          <div className="flex flex-col gap-8 md:gap-12">
-            {featuredProjects.map((project, idx) => (
-              <FadeIn key={idx}>
-                <motion.div 
-                  whileHover={{ y: -2 }}
-                  className="group relative bg-card/50 border border-border rounded-xl p-6 md:p-10 hover:border-primary/20 transition-all duration-300 overflow-hidden"
-                >
-                  <div className="absolute top-4 right-4 md:top-8 md:right-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ArrowUpRight className="w-6 h-6 text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </div>
-                  
-                  <div className="absolute -top-10 -right-10 md:-top-20 md:-right-10 pointer-events-none">
-                    <span className="font-mono text-[120px] md:text-[180px] leading-none text-foreground/5 select-none font-bold">
-                      0{idx + 1}
-                    </span>
-                  </div>
+          <Reveal delay={0.2}>
+            <p className="max-w-sm text-sm text-[#9ca3af] font-mono">
+              {"// EVM protocols, cybersecurity audit pipelines, on-chain analytics, and decentralized interfaces."}
+            </p>
+          </Reveal>
+        </div>
 
-                  <div className="relative z-10 max-w-2xl">
-                    <span className="inline-block px-3 py-1 mb-6 rounded-full border border-primary/20 text-xs font-medium tracking-wider text-primary uppercase bg-primary/5">
-                      {project.category}
-                    </span>
-                    
-                    <h3 className="text-2xl md:text-4xl font-semibold text-foreground mb-3">
-                      {project.title}
-                    </h3>
-                    
-                    <p className="font-mono text-sm text-primary mb-6">
-                      {project.subtitle}
-                    </p>
-                    
-                    <p className="text-muted-foreground mb-8 text-base md:text-lg leading-relaxed">
-                      {project.description}
-                    </p>
-                    
-                    <StaggerContainer className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech, tIdx) => (
-                        <StaggerItem key={tIdx}>
-                          <span className="inline-block px-3 py-1.5 rounded-full border border-border bg-background text-xs text-muted-foreground group-hover:border-primary/20 transition-colors">
-                            {tech}
-                          </span>
-                        </StaggerItem>
+        {/* Editorial Project Storytelling Stack */}
+        <div className="flex flex-col gap-24">
+          {projects.map((project, idx) => {
+            const indexStr = `0${idx + 1}`;
+            const Icon = projectIcons[project.id] || Terminal;
+
+            return (
+              <article
+                key={project.id}
+                className="group relative rounded-3xl bg-[#0c0e14]/90 border border-white/[0.08] hover:border-white/[0.18] transition-all duration-500 overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+              >
+                {/* Top specular border line */}
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.25] to-transparent" />
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 p-8 sm:p-12 lg:p-16 items-center">
+                  {/* Left Column: Metadata & Narrative */}
+                  <div className="lg:col-span-7 flex flex-col justify-between h-full">
+                    <div>
+                      {/* Project Index Number & Category */}
+                      <div className="flex items-center justify-between gap-4 mb-6">
+                        <span className="font-mono text-5xl sm:text-7xl font-extrabold text-white/[0.07] tracking-tighter select-none">
+                          {indexStr}
+                        </span>
+                        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] font-mono text-xs text-[#00d9ff]">
+                          <Icon className="w-3.5 h-3.5" />
+                          <span>{project.category}</span>
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#f0f0f0] tracking-tight group-hover:text-white transition-colors">
+                        {project.title}
+                      </h3>
+
+                      {/* Subtitle / Stack highlight */}
+                      <p className="font-mono text-xs sm:text-sm text-[#00d9ff] mt-2 mb-6">
+                        {project.subtitle}
+                      </p>
+
+                      {/* Long Detailed Description */}
+                      <p className="text-sm sm:text-base text-[#9ca3af] leading-relaxed mb-8">
+                        {project.longDescription}
+                      </p>
+                    </div>
+
+                    {/* Technologies Pills */}
+                    <div className="flex flex-wrap gap-2 pt-6 border-t border-white/[0.06]">
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-[#cbd5e1]"
+                        >
+                          {tech}
+                        </span>
                       ))}
-                    </StaggerContainer>
+                    </div>
                   </div>
-                </motion.div>
-              </FadeIn>
-            ))}
-          </div>
 
-          {/* Secondary Projects */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {secondaryProjects.map((project, idx) => (
-              <FadeIn key={idx} delay={0.1 * idx}>
-                <motion.div 
-                  whileHover={{ y: -2 }}
-                  className="group relative bg-card/30 border border-border rounded-xl p-6 md:p-8 hover:border-primary/20 transition-all duration-300 h-full flex flex-col"
-                >
-                  <div className="flex justify-between items-start mb-6">
-                    <span className="inline-block px-2 py-1 rounded border border-primary/20 text-[10px] font-medium tracking-wider text-primary uppercase bg-primary/5">
-                      {project.category}
-                    </span>
-                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                  {/* Right Column: Visual Telemetry Display Panel */}
+                  <div className="lg:col-span-5 flex flex-col justify-center">
+                    <div className="relative rounded-2xl bg-[#050507] border border-white/[0.08] p-6 sm:p-8 overflow-hidden shadow-2xl flex flex-col justify-between min-h-[300px]">
+                      {/* Grid background effect */}
+                      <div
+                        className="absolute inset-0 opacity-[0.05] pointer-events-none"
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(#00d9ff 1px, transparent 1px), linear-gradient(90deg, #00d9ff 1px, transparent 1px)",
+                          backgroundSize: "32px 32px",
+                        }}
+                      />
+
+                      {/* Top status */}
+                      <div className="relative z-10 flex items-center justify-between pb-4 border-b border-white/[0.06] text-xs font-mono text-[#6b7280]">
+                        <span className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-[#00d9ff]" />
+                          <span>ARCHITECTURE_VERIFIED</span>
+                        </span>
+                        <span>{project.category.toUpperCase()}</span>
+                      </div>
+
+                      {/* Center Interactive Concept Visualization */}
+                      <div className="relative z-10 my-8 flex flex-col items-center justify-center text-center">
+                        <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/[0.1] text-[#00d9ff] mb-4 shadow-[0_0_30px_rgba(0,217,255,0.15)] group-hover:scale-110 transition-transform duration-500">
+                          <Icon className="w-10 h-10" />
+                        </div>
+                        <span className="font-mono text-sm font-semibold text-[#f0f0f0]">
+                          {project.title}
+                        </span>
+                        <span className="font-mono text-xs text-[#6b7280] mt-1">
+                          Production Ready Architecture
+                        </span>
+                      </div>
+
+                      {/* Bottom Action Trigger */}
+                      <div className="relative z-10 pt-4 border-t border-white/[0.06] flex items-center justify-between">
+                        <span className="font-mono text-[11px] text-[#9ca3af]">
+                          Ecosystem: EVM / Systems
+                        </span>
+
+                        <LiquidButton
+                          size="sm"
+                          variant="cyan"
+                          onClick={() => {
+                            document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+                          }}
+                        >
+                          <span>Inquire</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </LiquidButton>
+                      </div>
+                    </div>
                   </div>
-                  
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="font-mono text-xs text-primary mb-4">
-                    {project.subtitle}
-                  </p>
-                  
-                  <p className="text-muted-foreground text-sm mb-8 flex-grow">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.technologies.slice(0, 4).map((tech, tIdx) => (
-                      <span key={tIdx} className="inline-block px-2 py-1 rounded-full border border-border bg-background text-[10px] text-muted-foreground group-hover:border-primary/20 transition-colors">
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 4 && (
-                      <span className="inline-block px-2 py-1 rounded-full border border-border bg-background text-[10px] text-muted-foreground">
-                        +{project.technologies.length - 4}
-                      </span>
-                    )}
-                  </div>
-                </motion.div>
-              </FadeIn>
-            ))}
-          </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
-  )
+  );
 }
