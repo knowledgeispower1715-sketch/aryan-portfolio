@@ -259,7 +259,7 @@ const integrations: IntegrationItem[] = [
   },
 ];
 
-const AnimatedPath = ({ d, id }: { d: string; id: string }) => {
+const AnimatedPath = ({ d, id, delay }: { d: string; id: string; delay: number }) => {
   return (
     <>
       <path
@@ -281,7 +281,7 @@ const AnimatedPath = ({ d, id }: { d: string; id: string }) => {
           duration: 4,
           repeat: Infinity,
           ease: "linear",
-          delay: Math.random() * 2,
+          delay: delay * 1.5,
         }}
       />
       <defs>
@@ -316,6 +316,7 @@ export function Integration() {
             key={integration.id}
             d={integration.path}
             id={`${containerId}-${integration.id}`}
+            delay={integration.delay}
           />
         ))}
       </svg>
@@ -323,20 +324,9 @@ export function Integration() {
       {/* Center Logo */}
       <div className="absolute top-1/2 left-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg border border-border bg-background p-0.5 shadow-md sm:rounded-2xl sm:p-2 sm:shadow-xl">
         <div className="border p-1 rounded-lg sm:p-2.5 sm:rounded-xl">
-          <img
-            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&h=100&auto=format&fit=crop&q=80"
-            alt="logo"
-            width={35}
-            height={35}
-            className="size-5 object-cover sm:size-9 rounded-md block dark:hidden"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=100&h=100&auto=format&fit=crop&q=80"
-            alt="logo"
-            width={35}
-            height={35}
-            className="size-5 object-cover sm:size-9 rounded-md hidden dark:block"
-          />
+          <div className="flex items-center justify-center size-5 sm:size-9 rounded-md bg-primary text-primary-foreground font-bold text-[8px] sm:text-sm tracking-tight">
+            AT
+          </div>
         </div>
         <motion.div
           className="absolute inset-0 rounded-lg border-2 border-primary/10 sm:rounded-2xl"
