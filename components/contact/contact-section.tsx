@@ -1,160 +1,171 @@
 "use client";
 
-import React, { useState } from "react";
-import { Mail, Copy, Check, ArrowUpRight, Terminal } from "lucide-react";
-import { personalInfo, availability } from "@/data/portfolio-data";
-import { Reveal } from "@/components/motion/motion-wrapper";
-import { MetallicButton } from "@/components/ui/metallic-button";
-import { LiquidButton } from "@/components/ui/liquid-glass-button";
-import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
+import { useRef, useState } from "react";
+import { motion, useInView } from "motion/react";
+import { personalInfo } from "@/data/portfolio-data";
+import { Mail, Copy, ExternalLink } from "lucide-react";
 
-export function ContactSection() {
+function CopyEmail() {
   const [copied, setCopied] = useState(false);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(personalInfo.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2200);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(personalInfo.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* fallback */
+    }
   };
 
   return (
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href={`mailto:${personalInfo.email}`}
+        className="group text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[#FAFAFA] hover:text-[#F5C518] transition-colors duration-300"
+        style={{ fontFamily: "var(--font-jetbrains)" }}
+        data-cursor="hover"
+      >
+        {personalInfo.email}
+      </a>
+      <button
+        onClick={copy}
+        className="flex items-center gap-2 px-4 py-2 border text-xs font-medium tracking-wide transition-colors duration-200 hover:border-[#F5C518] hover:text-[#F5C518]"
+        style={{
+          fontFamily: "var(--font-inter)",
+          borderColor: "rgba(255,255,255,0.12)",
+          color: "#555555",
+        }}
+        data-cursor="hover"
+      >
+        <Copy className="w-3.5 h-3.5" />
+        {copied ? "Copied!" : "Copy"}
+      </button>
+    </div>
+  );
+}
+
+export function ContactSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(sectionRef, { once: true, margin: "-6%" });
+
+  const words = ["LET'S", "BUILD", "SOMETHING", "REMARKABLE."];
+  const wordColors = ["#FAFAFA", "#F5C518", "#FAFAFA", "#FAFAFA"];
+
+  return (
     <section
-      id="transmission"
-      className="relative py-32 px-6 sm:px-10 lg:px-16 bg-[#050507] border-t border-white/[0.08] overflow-hidden"
+      id="contact"
+      ref={sectionRef}
+      className="relative min-h-screen flex flex-col items-center justify-center py-32 bg-[#0A0A0A] border-t overflow-hidden"
+      style={{ borderColor: "rgba(255,255,255,0.06)" }}
     >
-      {/* Background Ambience */}
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[radial-gradient(circle_at_center,rgba(0,217,255,0.04)_0%,transparent_70%)] pointer-events-none" />
+      {/* Ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at 50% 60%, rgba(245,197,24,0.06) 0%, transparent 65%)",
+        }}
+      />
 
-      <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Terminal Header Tag */}
-        <div className="text-center mb-12">
-          <Reveal>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.1] font-mono text-xs text-[#00d9ff] uppercase tracking-wider mb-6">
-              <Terminal className="w-3.5 h-3.5" />
-              <span>DIRECT TRANSMISSION CHANNEL // 06</span>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white uppercase leading-none mb-6">
-              Let&apos;s Build Something
-              <br />
-              <span className="bg-gradient-to-r from-[#00d9ff] via-white to-[#8b5cf6] bg-clip-text text-transparent">
-                Uncompromising & Resilient.
-              </span>
-            </h2>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <p className="max-w-xl mx-auto text-base sm:text-lg text-[#9ca3af] font-normal leading-relaxed">
-              Available for high-stakes blockchain engineering, EVM protocol architecture, DeFi security audits, and penetration testing.
-            </p>
-          </Reveal>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 w-full text-center">
+        {/* Section label */}
+        <div className="flex items-center gap-4 mb-20">
+          <span className="flex-1 h-px bg-[#1E1E1E]" />
+          <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-[#555555]" style={{ fontFamily: "var(--font-jetbrains)" }}>
+            06 — Contact
+          </span>
+          <span className="flex-1 h-px bg-[#1E1E1E]" />
         </div>
 
-        {/* Central Cryptographic Terminal Interface */}
-        <div className="max-w-3xl mx-auto rounded-3xl border border-white/[0.14] bg-[#0c0e14]/90 backdrop-blur-2xl p-8 sm:p-12 shadow-[0_24px_80px_rgba(0,0,0,0.8)] relative overflow-hidden">
-          {/* Top highlight */}
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00d9ff]/50 to-transparent" />
-
-          {/* Terminal Console Header */}
-          <div className="flex items-center justify-between pb-5 border-b border-white/[0.08] font-mono text-xs text-[#6b7280]">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-white font-semibold">CHANNEL: ENCRYPTED // READY</span>
+        {/* Giant headline — word by word reveal */}
+        <div
+          className="flex flex-col items-center gap-1 sm:gap-2 mb-16"
+          style={{ fontFamily: "var(--font-playfair)" }}
+        >
+          {words.map((word, i) => (
+            <div key={word} className="overflow-hidden">
+              <motion.div
+                initial={{ y: "105%" }}
+                animate={inView ? { y: "0%" } : {}}
+                transition={{
+                  duration: 0.9,
+                  delay: i * 0.12,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="text-[clamp(48px,9vw,120px)] font-black leading-none tracking-[-0.03em]"
+                style={{ color: wordColors[i] }}
+              >
+                {word}
+              </motion.div>
             </div>
-            <span className="text-[#00d9ff]">SEC_VERIFIED: 100%</span>
-          </div>
-
-          {/* Interactive Direct Email Interface */}
-          <div className="my-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-4 rounded-2xl bg-[#050507] border border-white/[0.1]">
-            <div className="flex items-center gap-3.5 pl-2 overflow-hidden">
-              <Mail className="w-5 h-5 text-[#00d9ff] shrink-0" />
-              <span className="font-mono text-sm sm:text-base text-white tracking-wide truncate">
-                {personalInfo.email}
-              </span>
-            </div>
-
-            <button
-              onClick={handleCopyEmail}
-              className={`px-4 py-2.5 rounded-xl font-mono text-xs font-semibold tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                copied
-                  ? "bg-emerald-500 text-black shadow-[0_0_20px_rgba(16,185,129,0.5)]"
-                  : "bg-white/[0.08] text-white hover:bg-white/[0.15] border border-white/[0.1]"
-              }`}
-              data-cursor="copy"
-            >
-              {copied ? (
-                <>
-                  <Check className="w-4 h-4" />
-                  <span>COPIED TO CLIPBOARD</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-4 h-4" />
-                  <span>COPY DISPATCH EMAIL</span>
-                </>
-              )}
-            </button>
-          </div>
-
-          {/* Dual Action Triggers: Liquid Glass + Metallic Hardware */}
-          <div className="flex flex-wrap items-center justify-center gap-5 pt-2">
-            <LiquidButton
-              variant="cyan"
-              size="lg"
-              href={`mailto:${personalInfo.email}`}
-              data-cursor="transmit"
-            >
-              <Mail className="w-4 h-4 text-black" />
-              <span>LAUNCH MAIL CLIENT</span>
-              <ArrowUpRight className="w-4 h-4 text-black/70" />
-            </LiquidButton>
-
-            <MetallicButton
-              variant="silver"
-              size="lg"
-              href={personalInfo.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="open"
-            >
-              <LinkedInIcon className="w-4 h-4 text-black" />
-              <span>LINKEDIN DISPATCH</span>
-              <ArrowUpRight className="w-4 h-4 text-black" />
-            </MetallicButton>
-
-            <MetallicButton
-              variant="dark"
-              size="lg"
-              href={personalInfo.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="open"
-            >
-              <GitHubIcon className="w-4 h-4 text-white" />
-              <span>GITHUB REPOSITORIES</span>
-              <ArrowUpRight className="w-4 h-4 text-white/70" />
-            </MetallicButton>
-          </div>
-
-          {/* Open Collaboration Roles */}
-          <div className="mt-10 pt-6 border-t border-white/[0.08] text-center">
-            <span className="font-mono text-[11px] text-[#6b7280] uppercase tracking-wider block mb-3">
-              ACTIVE ENGAGEMENT CAPABILITIES
-            </span>
-            <div className="flex flex-wrap justify-center gap-2">
-              {availability.roles.map((role) => (
-                <span
-                  key={role}
-                  className="px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] font-mono text-xs text-[#9ca3af]"
-                >
-                  {role}
-                </span>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
+
+        {/* Sub-label */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          className="text-sm text-[#555555] mb-10 max-w-sm mx-auto leading-relaxed"
+          style={{ fontFamily: "var(--font-inter)" }}
+        >
+          Open for Blockchain development, Web3 architecture, smart contract auditing,
+          and security engineering collaborations.
+        </motion.p>
+
+        {/* Email */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-14"
+        >
+          <CopyEmail />
+        </motion.div>
+
+        {/* Divider */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          className="w-px h-12 bg-[#333333] mx-auto mb-10 origin-top"
+        />
+
+        {/* Social links */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex items-center justify-center gap-6"
+        >
+          {[
+            { icon: ExternalLink, label: "GitHub", href: personalInfo.github },
+            { icon: ExternalLink, label: "LinkedIn", href: personalInfo.linkedin },
+            { icon: Mail, label: "Email", href: `mailto:${personalInfo.email}` },
+          ].map(({ icon: Icon, label, href }) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith("mailto") ? undefined : "_blank"}
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-2.5 transition-transform hover:-translate-y-1 duration-300"
+              data-cursor="hover"
+            >
+              <div
+                className="w-12 h-12 flex items-center justify-center border transition-colors duration-300 group-hover:border-[#F5C518] group-hover:text-[#F5C518]"
+                style={{ borderColor: "rgba(255,255,255,0.1)", color: "#555555" }}
+              >
+                <Icon className="w-5 h-5" />
+              </div>
+              <span
+                className="text-[10px] tracking-[0.18em] uppercase text-[#444444] group-hover:text-[#888888] transition-colors"
+                style={{ fontFamily: "var(--font-jetbrains)" }}
+              >
+                {label}
+              </span>
+            </a>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

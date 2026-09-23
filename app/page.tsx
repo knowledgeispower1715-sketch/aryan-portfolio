@@ -1,41 +1,48 @@
-import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { CustomCursor } from "@/components/ui/custom-cursor";
+import { MagneticCursor } from "@/components/ui/magnetic-cursor";
 import { Navbar } from "@/components/navigation/navbar";
-import { CyberScene } from "@/components/3d/cyber-scene";
 import { Hero } from "@/components/hero/hero";
-import { IdentityManifesto } from "@/components/identity/identity-manifesto";
+import { MarqueeTicker } from "@/components/ui/marquee-ticker";
+import { AboutSection } from "@/components/about/about-section";
 import { SkillsSection } from "@/components/skills/skills-section";
 import { ProjectsSection } from "@/components/projects/projects-section";
-import { TerminalSection } from "@/components/terminal/terminal-section";
-import { AboutSection } from "@/components/about/about-section";
+import { JourneySection } from "@/components/journey/journey-section";
 import { ContactSection } from "@/components/contact/contact-section";
 import { Footer } from "@/components/footer/footer";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-[#050507] text-[#ededef] selection:bg-[#00d9ff]/30 selection:text-[#00d9ff]">
-      {/* Real-Time Interactive 3D WebGL Scene Core */}
-      <CyberScene />
+    <div className="relative bg-[#0A0A0A] text-[#FAFAFA] selection:bg-[rgba(245,197,24,0.25)] selection:text-[#FAFAFA]">
+      {/* Magnetic cursor — desktop only */}
+      <MagneticCursor />
 
-      {/* Top Scroll Indicator & Magnetic Cursor */}
-      <ScrollProgress />
-      <CustomCursor />
-
-      {/* Floating Tactical Flight Deck */}
+      {/* Floating navigation */}
       <Navbar />
 
-      {/* Main Narrative Chapters */}
-      <main className="relative flex flex-col z-10">
+      {/* Main experience */}
+      <main>
+        {/* 01 — Split-screen editorial hero */}
         <Hero />
-        <IdentityManifesto />
-        <SkillsSection />
-        <ProjectsSection />
-        <TerminalSection />
+
+        {/* Marquee ticker strip */}
+        <MarqueeTicker />
+
+        {/* 02 — Giant stats + editorial bio */}
         <AboutSection />
+
+        {/* 03 — Category skill grid */}
+        <SkillsSection />
+
+        {/* 04 — Horizontal scroll project gallery (GSAP pinned) */}
+        <ProjectsSection />
+
+        {/* 05 — Staircase timeline journey */}
+        <JourneySection />
+
+        {/* 06 — Large CTA contact */}
         <ContactSection />
       </main>
 
-      {/* Engineering Telemetry Footer */}
+      {/* Footer */}
       <Footer />
     </div>
   );
