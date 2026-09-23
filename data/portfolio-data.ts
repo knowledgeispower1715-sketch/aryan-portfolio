@@ -1,11 +1,65 @@
 // Types
-export interface PersonalInfo { name: string, title: string, age: number, location: string, email: string, linkedin: string, github: string, bio: string, shortBio: string }
-export interface Skill { name: string, category?: string, icon?: string }
-export interface SkillCategory { name: string, slug: string, skills: Skill[] }
-export interface Project { id: string, title: string, subtitle: string, description: string, longDescription: string, technologies: string[], category: string, link?: string, github?: string, featured: boolean }
-export interface TimelineItem { year: string, title: string, description: string }
-export interface NavItem { label: string, href: string }
-export interface SocialLink { platform: string, url: string, icon: string }
+export interface PersonalInfo {
+  name: string;
+  title: string;
+  age: number;
+  location: string;
+  email: string;
+  linkedin: string;
+  github: string;
+  bio: string;
+  shortBio: string;
+  avatar: string;
+}
+
+export interface Skill {
+  name: string;
+  rating?: string;
+  category?: string;
+  icon?: string;
+}
+
+export interface SkillCategory {
+  name: string;
+  slug: string;
+  skills: Skill[];
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  longDescription: string;
+  technologies: string[];
+  category: string;
+  link?: string;
+  github?: string;
+  featured: boolean;
+}
+
+export interface TimelineItem {
+  year: string;
+  title: string;
+  description: string;
+}
+
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
+export interface SocialLink {
+  platform: string;
+  url: string;
+  icon: string;
+}
+
+export interface EducationItem {
+  title: string;
+  role: string;
+  description: string;
+}
 
 // Data
 export const personalInfo: PersonalInfo = {
@@ -16,24 +70,25 @@ export const personalInfo: PersonalInfo = {
   email: 'tiwariji0028@gmail.com',
   linkedin: 'https://www.linkedin.com/in/aryan-t-199014224',
   github: 'https://github.com/knowledgeispower1715-sketch',
-  bio: `A 20-year-old blockchain developer and security engineer with over 8 years of experience in the cryptocurrency ecosystem. Starting at age 12, I developed deep expertise in blockchain architecture, smart contract development, and cybersecurity—combining hands-on penetration testing with security-first protocol design.
+  avatar: 'https://media.licdn.com/dms/image/v2/D4D03AQF_wlATDTRqpw/profile-displayphoto-scale_400_400/B4DZn1lHvYJUAg-/0/1760761774987?e=1776902400&v=beta&t=A5O0iygGdZSzSZdAd66A0ikz16lkzL8E-OAZxSwh7hY',
+  bio: `A 20-year-old blockchain developer and security engineer with over 8 years of experience in the cryptocurrency ecosystem. Starting at age 12 in 2018, I developed deep expertise in blockchain architecture, smart contract development, and cybersecurity—combining hands-on penetration testing with security-first protocol design.
 
 I specialize in building secure, scalable Web3 solutions across EVM-compatible chains, with a strong foundation in full-stack development and algorithmic trading systems. My work bridges the gap between traditional security engineering and decentralized application architecture.`,
   shortBio: 'Blockchain developer and security engineer building secure Web3 solutions since age 12.',
-}
+};
 
 export const skillCategories: SkillCategory[] = [
   {
     name: 'Languages',
     slug: 'languages',
     skills: [
-      { name: 'Python' },
-      { name: 'Solidity' },
-      { name: 'JavaScript' },
-      { name: 'TypeScript' },
-      { name: 'C++' },
-      { name: 'Java' },
-      { name: 'C' },
+      { name: 'Python', rating: '★★★★★' },
+      { name: 'Solidity', rating: '★★★★☆' },
+      { name: 'C++', rating: '★★★★☆' },
+      { name: 'Java', rating: '★★★★☆' },
+      { name: 'C', rating: '★★★★☆' },
+      { name: 'JavaScript', rating: '★★★★☆' },
+      { name: 'TypeScript', rating: '★★★★☆' },
     ]
   },
   {
@@ -71,6 +126,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Next.js' },
       { name: 'Tailwind CSS' },
       { name: 'Motion' },
+      { name: 'Three.js' },
       { name: 'shadcn/ui' },
       { name: 'Figma' },
     ]
@@ -79,15 +135,39 @@ export const skillCategories: SkillCategory[] = [
     name: 'Crypto Intelligence',
     slug: 'crypto',
     skills: [
-      { name: 'On-Chain Analysis' },
+      { name: 'Bitcoin & Blockchain' },
       { name: 'Trading & Analysis' },
-      { name: 'Mining Optimization' },
+      { name: 'Mining & Pools' },
+      { name: 'On-Chain Analysis' },
       { name: 'Tokenomics' },
       { name: 'Portfolio Management' },
-      { name: 'Market Analysis' },
+      { name: 'Market Microstructure' },
     ]
   }
-]
+];
+
+export const educationKnowledge: EducationItem[] = [
+  {
+    title: 'Blockchain & Cryptocurrency',
+    role: 'Self-Taught Expert (8+ Years)',
+    description: 'Online courses, core documentation, protocol whitepapers, hands-on EVM testnets and mainnets.'
+  },
+  {
+    title: 'Low-Level & High-Level Systems',
+    role: 'Multi-Language Expert',
+    description: 'Python, C++, Java, C, Solidity, JavaScript, and TypeScript compiler architectures.'
+  },
+  {
+    title: 'Cybersecurity & Ethical Hacking',
+    role: 'Kali Linux Specialist',
+    description: 'Hands-on penetration testing, static contract analysis, access control and reentrancy audits.'
+  },
+  {
+    title: 'Web3 & Decentralized Finance',
+    role: 'DeFi Protocol Architect',
+    description: 'Automated market makers, liquidity mechanisms, tokenomics, and gas-optimized execution.'
+  }
+];
 
 export const projects: Project[] = [
   {
@@ -130,7 +210,7 @@ export const projects: Project[] = [
     category: 'Frontend',
     featured: false,
   }
-]
+];
 
 export const timeline: TimelineItem[] = [
   { year: '2018', title: 'Entered Crypto at Age 12', description: 'Began exploring Bitcoin, blockchain fundamentals, and cryptocurrency markets.' },
@@ -139,23 +219,25 @@ export const timeline: TimelineItem[] = [
   { year: '2023', title: 'Security Engineering', description: 'Trained in Kali Linux, penetration testing, and smart contract auditing.' },
   { year: '2024', title: 'Full-Stack Web3', description: 'Integrated modern frontend (React, Next.js, Tailwind) with blockchain backends.' },
   { year: 'Now', title: 'Building & Shipping', description: 'Focused on secure, scalable Web3 solutions and expanding into AI-assisted development.' },
-]
+];
 
 export const navItems: NavItem[] = [
-  { label: 'About', href: '#about' },
-  { label: 'Stack', href: '#stack' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Journey', href: '#journey' },
-  { label: 'Contact', href: '#contact' },
-]
+  { label: 'Origin', href: '#hero' },
+  { label: 'Manifesto', href: '#manifesto' },
+  { label: 'Ecosystem', href: '#ecosystem' },
+  { label: 'Systems', href: '#work' },
+  { label: 'Terminal', href: '#terminal-section' },
+  { label: 'Odyssey', href: '#odyssey' },
+  { label: 'Contact', href: '#transmission' },
+];
 
 export const socialLinks: SocialLink[] = [
   { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/aryan-t-199014224', icon: 'linkedin' },
   { platform: 'GitHub', url: 'https://github.com/knowledgeispower1715-sketch', icon: 'github' },
   { platform: 'Email', url: 'mailto:tiwariji0028@gmail.com', icon: 'mail' },
-]
+];
 
 export const availability = {
   status: 'open',
   roles: ['Blockchain Development', 'Smart Contracts', 'DeFi Projects', 'Web3', 'Security Auditing', 'Full-Stack Development'],
-}
+};

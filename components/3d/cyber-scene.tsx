@@ -30,10 +30,10 @@ export function CyberScene({ className = "" }: CyberSceneProps) {
 
     // Three.js Scene Setup
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x050507, 0.035);
+    scene.fog = new THREE.FogExp2(0x050507, 0.03);
 
-    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
-    camera.position.z = 7;
+    const camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000);
+    camera.position.z = 7.5;
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -43,51 +43,47 @@ export function CyberScene({ className = "" }: CyberSceneProps) {
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = 1.3;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     container.appendChild(renderer.domElement);
 
-    // 1. Central 3D Cryptographic Core Group
-    const coreGroup = new THREE.Group();
-    scene.add(coreGroup);
+    // 1. Central Master 3D Group
+    const masterGroup = new THREE.Group();
+    scene.add(masterGroup);
 
-    // Outer Holographic Wireframe Icosahedron
-    const icosaGeo = new THREE.IcosahedronGeometry(2.2, 1);
-    const wireframeMat = new THREE.MeshBasicMaterial({
+    // Sculptural Artifact: Metallic Torus Knot Ribbon with Physical Shader
+    const knotGeo = new THREE.TorusKnotGeometry(1.6, 0.42, 128, 32, 2, 3);
+    const knotMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(0xd2d6e2),
+      emissive: new THREE.Color(0x080a12),
+      roughness: 0.16,
+      metalness: 0.92,
+      clearcoat: 0.85,
+      clearcoatRoughness: 0.08,
+      reflectivity: 0.95,
+    });
+    const knotMesh = new THREE.Mesh(knotGeo, knotMat);
+    knotMesh.castShadow = true;
+    knotMesh.receiveShadow = true;
+    masterGroup.add(knotMesh);
+
+    // Internal Evolving Holographic Wireframe Core
+    const innerGeo = new THREE.IcosahedronGeometry(0.85, 1);
+    const innerMat = new THREE.MeshBasicMaterial({
       color: 0x00d9ff,
       wireframe: true,
       transparent: true,
-      opacity: 0.28,
+      opacity: 0.45,
     });
-    const icosaMesh = new THREE.Mesh(icosaGeo, wireframeMat);
-    coreGroup.add(icosaMesh);
+    const innerMesh = new THREE.Mesh(innerGeo, innerMat);
+    masterGroup.add(innerMesh);
 
-    // Inner Metallic / Crystalline Octahedron
-    const octGeo = new THREE.OctahedronGeometry(1.2, 0);
-    const octMat = new THREE.MeshStandardMaterial({
-      color: 0x0d121d,
-      roughness: 0.15,
-      metalness: 0.9,
-      emissive: 0x00d9ff,
-      emissiveIntensity: 0.15,
-    });
-    const octMesh = new THREE.Mesh(octGeo, octMat);
-    coreGroup.add(octMesh);
-
-    // Inner Crystalline Point Vertices
-    const octWire = new THREE.MeshBasicMaterial({
-      color: 0x8b5cf6,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.4,
-    });
-    const octWireMesh = new THREE.Mesh(octGeo, octWire);
-    coreGroup.add(octWireMesh);
-
-    // 2. Multi-Axis Orbital Holographic Gimbal Rings
+    // Orbital Holographic Rings
     const ringMat1 = new THREE.MeshBasicMaterial({
       color: 0x00d9ff,
       transparent: true,
-      opacity: 0.2,
+      opacity: 0.22,
       side: THREE.DoubleSide,
     });
     const ringMat2 = new THREE.MeshBasicMaterial({
@@ -97,19 +93,19 @@ export function CyberScene({ className = "" }: CyberSceneProps) {
       side: THREE.DoubleSide,
     });
 
-    const ringGeo1 = new THREE.TorusGeometry(3.0, 0.015, 16, 100);
+    const ringGeo1 = new THREE.TorusGeometry(2.8, 0.015, 16, 100);
     const ring1 = new THREE.Mesh(ringGeo1, ringMat1);
     ring1.rotation.x = Math.PI / 3;
-    coreGroup.add(ring1);
+    masterGroup.add(ring1);
 
-    const ringGeo2 = new THREE.TorusGeometry(3.4, 0.015, 16, 100);
+    const ringGeo2 = new THREE.TorusGeometry(3.3, 0.015, 16, 100);
     const ring2 = new THREE.Mesh(ringGeo2, ringMat2);
     ring2.rotation.y = Math.PI / 4;
     ring2.rotation.z = Math.PI / 6;
-    coreGroup.add(ring2);
+    masterGroup.add(ring2);
 
-    // 3. Distributed 3D Particle Constellation (1,000 Nodes)
-    const particleCount = 1000;
+    // 2. Distributed 3D Particle Constellation (1,200 Nodes)
+    const particleCount = 1200;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
     const particleColors = new Float32Array(particleCount * 3);
@@ -119,7 +115,7 @@ export function CyberScene({ className = "" }: CyberSceneProps) {
     const whiteColor = new THREE.Color(0xffffff);
 
     for (let i = 0; i < particleCount; i++) {
-      const radius = 4 + Math.random() * 12;
+      const radius = 3.5 + Math.random() * 14;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(Math.random() * 2 - 1);
 
@@ -137,25 +133,29 @@ export function CyberScene({ className = "" }: CyberSceneProps) {
     particleGeo.setAttribute("color", new THREE.BufferAttribute(particleColors, 3));
 
     const particleMat = new THREE.PointsMaterial({
-      size: 0.04,
+      size: 0.045,
       vertexColors: true,
       transparent: true,
-      opacity: 0.6,
+      opacity: 0.65,
       blending: THREE.AdditiveBlending,
     });
     const particleSystem = new THREE.Points(particleGeo, particleMat);
     scene.add(particleSystem);
 
-    // 4. Studio Lighting System
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    // 3. Cinematic Studio Lighting System
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
 
-    const cyanLight = new THREE.PointLight(0x00d9ff, 3, 20);
-    cyanLight.position.set(4, 3, 4);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    dirLight.position.set(5, 8, 6);
+    scene.add(dirLight);
+
+    const cyanLight = new THREE.PointLight(0x00d9ff, 4.5, 25);
+    cyanLight.position.set(5, 3, 5);
     scene.add(cyanLight);
 
-    const violetLight = new THREE.PointLight(0x8b5cf6, 2.5, 20);
-    violetLight.position.set(-4, -3, 3);
+    const violetLight = new THREE.PointLight(0x8b5cf6, 3.5, 25);
+    violetLight.position.set(-5, -3, 4);
     scene.add(violetLight);
 
     // Mouse & Scroll Interactivity
@@ -199,38 +199,36 @@ export function CyberScene({ className = "" }: CyberSceneProps) {
       mouse.y += (mouse.targetY - mouse.y) * 0.05;
 
       if (!prefersReducedMotion) {
-        // Continuous Rotation
-        icosaMesh.rotation.x = elapsed * 0.15;
-        icosaMesh.rotation.y = elapsed * 0.2;
+        // Continuous Sculptural Rotation
+        knotMesh.rotation.x = elapsed * 0.22;
+        knotMesh.rotation.y = elapsed * 0.28;
 
-        octMesh.rotation.x = -elapsed * 0.25;
-        octMesh.rotation.y = -elapsed * 0.3;
-        octWireMesh.rotation.x = octMesh.rotation.x;
-        octWireMesh.rotation.y = octMesh.rotation.y;
+        innerMesh.rotation.x = -elapsed * 0.35;
+        innerMesh.rotation.y = -elapsed * 0.45;
 
-        ring1.rotation.z = elapsed * 0.18;
-        ring2.rotation.x = elapsed * 0.12;
+        ring1.rotation.z = elapsed * 0.2;
+        ring2.rotation.x = elapsed * 0.16;
 
-        particleSystem.rotation.y = elapsed * 0.03;
-        particleSystem.rotation.x = elapsed * 0.015;
+        particleSystem.rotation.y = elapsed * 0.035;
+        particleSystem.rotation.x = elapsed * 0.02;
       }
 
       // Mouse-driven core parallax
-      coreGroup.rotation.x = mouse.y * 0.4;
-      coreGroup.rotation.y = mouse.x * 0.5;
+      masterGroup.rotation.x = mouse.y * 0.45;
+      masterGroup.rotation.y = mouse.x * 0.55;
 
       // Scroll-driven Camera Flythrough Dynamics
       const maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1);
       const scrollProgress = Math.min(scrollY / maxScroll, 1);
 
-      // Camera smoothly tracks deeper into the particle lattice as user scrolls
-      camera.position.z = 7 - scrollProgress * 3.5;
-      camera.position.y = -scrollProgress * 2.0;
-      coreGroup.position.y = scrollProgress * 1.5;
+      // Camera smoothly tracks through the lattice as user scrolls
+      camera.position.z = 7.5 - scrollProgress * 4.0;
+      camera.position.y = -scrollProgress * 2.2;
+      masterGroup.position.y = scrollProgress * 1.8;
 
       // Pulsing lighting
-      cyanLight.intensity = 2.5 + Math.sin(elapsed * 2) * 0.6;
-      violetLight.intensity = 2.0 + Math.cos(elapsed * 1.8) * 0.5;
+      cyanLight.intensity = 3.5 + Math.sin(elapsed * 2.2) * 1.0;
+      violetLight.intensity = 2.8 + Math.cos(elapsed * 1.9) * 0.8;
 
       renderer.render(scene, camera);
     };
@@ -244,11 +242,10 @@ export function CyberScene({ className = "" }: CyberSceneProps) {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
 
-      icosaGeo.dispose();
-      wireframeMat.dispose();
-      octGeo.dispose();
-      octMat.dispose();
-      octWire.dispose();
+      knotGeo.dispose();
+      knotMat.dispose();
+      innerGeo.dispose();
+      innerMat.dispose();
       ringGeo1.dispose();
       ringMat1.dispose();
       ringGeo2.dispose();

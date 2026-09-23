@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { ArrowDown, ArrowUpRight, Terminal, Shield, Cpu, Activity } from "lucide-react";
 import { WebGLShader } from "@/components/ui/web-gl-shader";
@@ -171,8 +172,54 @@ export function Hero() {
               <span className="text-[#00d9ff] font-bold">STATE: ONLINE</span>
             </div>
 
+            {/* Biometric Operator Holographic Frame */}
+            <div className="py-4 border-b border-white/[0.08] flex items-center gap-4">
+              <div className="relative group/avatar shrink-0">
+                {/* 3D Holographic Outer Frame */}
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border-2 border-[#00d9ff]/50 bg-black/60 shadow-[0_0_20px_rgba(0,217,255,0.25)]">
+                  {/* Real Authenticated Profile Photo */}
+                  <Image
+                    src={personalInfo.avatar}
+                    alt={personalInfo.name}
+                    width={80}
+                    height={80}
+                    className="w-full h-full object-cover object-center filter contrast-105 brightness-100 group-hover/avatar:scale-105 transition-transform duration-500"
+                    priority
+                  />
+                  {/* Holographic Cyan Scanlines Overlay */}
+                  <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,217,255,0.15)_50%)] bg-[length:100%_4px] pointer-events-none mix-blend-overlay opacity-70" />
+                  {/* Radial Lens Glare */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#00d9ff]/10 via-transparent to-white/10 pointer-events-none" />
+                </div>
+                {/* Status Indicator */}
+                <div className="absolute -bottom-1 -right-1 flex items-center justify-center w-5 h-5 rounded-full bg-[#050507] border border-[#00d9ff]/60">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse" />
+                </div>
+              </div>
+
+              <div className="flex flex-col min-w-0 font-mono">
+                <div className="flex items-center gap-1.5 text-[10px] text-[#00d9ff] font-bold tracking-widest uppercase">
+                  <span>SEC_OPERATOR // VERIFIED</span>
+                </div>
+                <h3 className="text-base font-bold text-white tracking-tight truncate">
+                  {personalInfo.name}
+                </h3>
+                <p className="text-xs text-[#9ca3af] truncate">
+                  Blockchain & Security Engineer
+                </p>
+                <div className="mt-1.5 flex items-center gap-2 text-[10px] text-[#6b7280]">
+                  <span className="px-1.5 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-[#dedede]">
+                    AGE 20
+                  </span>
+                  <span className="px-1.5 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-emerald-400">
+                    CLEARANCE: L5
+                  </span>
+                </div>
+              </div>
+            </div>
+
             {/* Telemetry Metric Rows */}
-            <div className="py-5 flex flex-col gap-4 text-xs font-mono">
+            <div className="py-4 flex flex-col gap-3 text-xs font-mono">
               <div className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06]">
                 <span className="text-[#8b949e] flex items-center gap-2">
                   <Shield className="w-3.5 h-3.5 text-[#00d9ff]" />
