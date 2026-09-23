@@ -7,6 +7,7 @@ import { personalInfo } from "@/data/portfolio-data";
 const NAV_LINKS = [
   { label: "About", href: "#about" },
   { label: "Stack", href: "#skills" },
+  { label: "Ecosystem", href: "#ecosystem" },
   { label: "Work", href: "#projects" },
   { label: "Journey", href: "#journey" },
   { label: "Contact", href: "#contact" },

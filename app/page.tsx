@@ -4,6 +4,7 @@ import { Hero } from "@/components/hero/hero";
 import { MarqueeTicker } from "@/components/ui/marquee-ticker";
 import { AboutSection } from "@/components/about/about-section";
 import { SkillsSection } from "@/components/skills/skills-section";
+import { EcosystemSection } from "@/components/ecosystem/ecosystem-section";
 import { ProjectsSection } from "@/components/projects/projects-section";
 import { JourneySection } from "@/components/journey/journey-section";
 import { ContactSection } from "@/components/contact/contact-section";
@@ -31,6 +32,9 @@ export default function Home() {
 
         {/* 03 — Category skill grid */}
         <SkillsSection />
+
+        {/* 03.5 — Toolchain Architecture (Interactive Integration Card) */}
+        <EcosystemSection />
 
         {/* 04 — Horizontal scroll project gallery (GSAP pinned) */}
         <ProjectsSection />
