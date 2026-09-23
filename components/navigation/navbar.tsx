@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, ArrowUpRight, Terminal } from "lucide-react";
+import { Menu, X, ArrowUpRight, Terminal, Volume2, VolumeX } from "lucide-react";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
+import { soundFX } from "@/lib/sound-fx";
 
 const NAV_CHAPTERS = [
   { id: "hero", label: "01 // ORIGIN", target: "hero" },
@@ -18,6 +19,7 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -117,12 +119,36 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Action Trigger / Contact Quick-jump */}
+          {/* Action Trigger / Contact Quick-jump & Audio Toggle */}
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                const active = soundFX.toggle();
+                setSoundEnabled(active);
+              }}
+              title="Toggle Cybernetic Audio Synthesizer"
+              className={`p-2 rounded-full border transition-all cursor-pointer ${
+                soundEnabled
+                  ? "bg-[#00d9ff]/15 border-[#00d9ff]/50 text-[#00d9ff] shadow-[0_0_12px_rgba(0,217,255,0.4)]"
+                  : "bg-white/[0.03] border-white/[0.1] text-[#8b949e] hover:text-white"
+              }`}
+              data-cursor="pointer"
+              aria-label="Toggle Sound Effects"
+            >
+              {soundEnabled ? (
+                <Volume2 className="w-3.5 h-3.5" />
+              ) : (
+                <VolumeX className="w-3.5 h-3.5" />
+              )}
+            </button>
+
             <LiquidButton
               variant="default"
               size="sm"
-              onClick={() => scrollTo("transmission")}
+              onClick={() => {
+                soundFX.playClick();
+                scrollTo("transmission");
+              }}
               className="text-xs font-mono tracking-wider"
               data-cursor="transmit"
             >

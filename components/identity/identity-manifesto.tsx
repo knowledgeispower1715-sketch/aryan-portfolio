@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Shield, Lock, Layers, Zap, Terminal, ChevronRight, CheckCircle2 } from "lucide-react";
 import { Reveal, StaggerContainer, StaggerItem } from "@/components/motion/motion-wrapper";
+import { TiltCard } from "@/components/ui/tilt-card";
 
 export function IdentityManifesto() {
   const [activePillar, setActivePillar] = useState<number | null>(null);
@@ -114,7 +115,8 @@ export function IdentityManifesto() {
 
             return (
               <StaggerItem key={pillar.id}>
-                <div
+                <TiltCard
+                  maxTilt={6}
                   onClick={() => setActivePillar(isExpanded ? null : idx)}
                   className={`group relative rounded-2xl p-7 transition-all duration-300 cursor-pointer overflow-hidden border ${
                     isExpanded
@@ -183,7 +185,7 @@ export function IdentityManifesto() {
                       {isExpanded ? "[ COLLAPSE DOSSIER ]" : "[ CLICK TO INSPECT ]"}
                     </span>
                   </div>
-                </div>
+                </TiltCard>
               </StaggerItem>
             );
           })}

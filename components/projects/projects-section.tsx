@@ -5,6 +5,7 @@ import { ArrowUpRight, Terminal, CheckCircle2 } from "lucide-react";
 import { projects } from "@/data/portfolio-data";
 import { Reveal } from "@/components/motion/motion-wrapper";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
+import { TiltCard } from "@/components/ui/tilt-card";
 
 export function ProjectsSection() {
 
@@ -105,8 +106,9 @@ export function ProjectsSection() {
             const isEven = idx % 2 === 1;
 
             return (
-              <article
+              <TiltCard
                 key={project.id}
+                maxTilt={4}
                 className="relative rounded-3xl border border-white/[0.12] bg-[#090b10]/95 backdrop-blur-2xl p-8 sm:p-12 lg:p-14 overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.8)]"
               >
                 {/* Subtle top edge specular highlight */}
@@ -289,7 +291,7 @@ export function ProjectsSection() {
                     </div>
                   </div>
                 </div>
-              </article>
+              </TiltCard>
             );
           })}
         </div>

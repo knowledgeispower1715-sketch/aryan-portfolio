@@ -6,11 +6,14 @@ import { ArrowDown, ArrowUpRight, Terminal, Shield, Cpu, Activity } from "lucide
 import { WebGLShader } from "@/components/ui/web-gl-shader";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import { MetallicButton } from "@/components/ui/metallic-button";
+import { TiltCard } from "@/components/ui/tilt-card";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
+import { soundFX } from "@/lib/sound-fx";
 import { personalInfo } from "@/data/portfolio-data";
 
 export function Hero() {
   const scrollTo = (id: string) => {
+    soundFX.playClick();
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -152,11 +155,9 @@ export function Hero() {
 
         {/* RIGHT COLUMN: Real-Time Cybernetic Telemetry Terminal (5 Cols) */}
         <div className="lg:col-span-5 flex flex-col items-center lg:items-end">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full max-w-md rounded-2xl border border-white/[0.14] bg-[#0c0e14]/85 backdrop-blur-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.15)] relative overflow-hidden"
+          <TiltCard
+            maxTilt={12}
+            className="w-full max-w-md rounded-2xl border border-white/[0.14] bg-[#0c0e14]/90 backdrop-blur-2xl p-6 shadow-[0_24px_60px_rgba(0,0,0,0.85),inset_0_1px_1px_rgba(255,255,255,0.15)] relative overflow-hidden"
           >
             {/* Glossy top edge highlight */}
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00d9ff]/50 to-transparent" />
@@ -204,7 +205,7 @@ export function Hero() {
               <p className="text-emerald-400">✓ Kali Linux: PenTest Vectors Active</p>
               <p className="text-[#f0f0f0]">● Languages: Sol · Py · C++ · Java · TS</p>
             </div>
-          </motion.div>
+          </TiltCard>
         </div>
       </div>
 
